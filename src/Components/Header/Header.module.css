@@ -1,0 +1,39 @@
+.h_1{
+	background-color: #444444;
+	display: flex;
+	justify-content: flex-start;
+}
+.h_1 .block{
+	margin: 5px;
+	margin-left: 2%;
+	color: #eeeeee;
+}
+.h_2{
+	background-color: #00b2dd;
+	display: flex;
+}
+.h_2 img{
+	left: 10px;
+	width: 250px;
+}
+.h_2 .bars{
+	width: 100%;
+	margin: auto;
+	display: flex;
+	justify-content: space-around;
+}
+.bar{
+  padding: 20px;
+  transition: ease-out .3s;
+  text-decoration: none;
+  color: black;
+}
+.bar:visited{
+	color: black;
+}
+.bar:hover{
+  	transform: scale(1.2);
+}
+.bar:active{
+  color:pink;
+}
