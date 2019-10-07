@@ -7,6 +7,7 @@ const StartPage = () =>{
 		<div>
 			<header>
 				<h1>Hello world!</h1>
+				<h2>Hi girls and hi ziabls</h2>
 			</header>
 		</div>
 	);
