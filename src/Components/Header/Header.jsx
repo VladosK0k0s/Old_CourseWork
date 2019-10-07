@@ -1,7 +1,7 @@
 import React from 'react';
 import classes from './Header.module.css'
 import {NavLink} from 'react-router-dom'
-import {Route, HashRouter, BrowserRouter} from 'react-router-dom'
+
 
 
 const Header = () =>{
@@ -19,6 +19,9 @@ const Header = () =>{
 					</div>
 					<div className={classes.block}>
 						Telegram: @micro4elik
+					</div>
+					<div className={classes.block}>
+						Skype: p.s.vlad200@ukr.net
 					</div>
 			</div>
 			<div className={classes.h_2}>
