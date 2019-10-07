@@ -7,8 +7,10 @@ let countries = ['Afghanistan', 'Albania', 'Algeria', 'American Samoa', 'Andorra
 
 const Task1 = () =>{
 	return (
-		<div>
-			<h1>Task1</h1>
+		<div className={classes.task1}>
+			<header>
+				<h1>Task1</h1>
+			</header>
 			<h2>1.1</h2>
 			<h2>1.2</h2>
 				<div>

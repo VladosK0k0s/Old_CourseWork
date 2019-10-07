@@ -5,7 +5,9 @@ import classes from './StartPage.module.css'
 const StartPage = () =>{
 	return(
 		<div>
-			<h1>Hello world!</h1>
+			<header>
+				<h1>Hello world!</h1>
+			</header>
 		</div>
 	);
 }

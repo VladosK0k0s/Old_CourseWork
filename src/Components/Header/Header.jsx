@@ -27,8 +27,6 @@ const Header = () =>{
 					<NavLink className={classes.bar} to = '/'>Hom</NavLink>
 					<NavLink className={classes.bar} to = '/task1'>Task 1</NavLink>
 					<NavLink className={classes.bar} to = '/task2'>Task 2</NavLink>
-					<NavLink className={classes.bar} to = '/task3'>Task 3</NavLink>
-					<NavLink className={classes.bar} to = '/task4'>Task 4</NavLink>
 				</div>
 			</div>	
 		</div>
