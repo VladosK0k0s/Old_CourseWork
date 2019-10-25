@@ -62,7 +62,7 @@ hr{
 .form2 td{
 	text-align: left;
 }
-.form2 input, textarea, select{
+.form2 input, .form2 textarea, .form2 select{
 	width: 100%;
 	padding: 5px;
  	border: none;
@@ -71,6 +71,7 @@ hr{
 	background-color: #222;
 	display: block;
 	outline: 0;
+	resize: none;
 }
 .form2 input:focus {
 	outline: 0;

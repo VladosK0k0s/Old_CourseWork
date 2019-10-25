@@ -1,16 +1,19 @@
 import React from 'react';
 import './StartPage.css'
+import ListItems from './ListItems/ListItems.jsx'
 
 
-const StartPage = () =>{
-	return(
-		<div>
-			<header>
-				<h1>Hello world!</h1>
-				<h2>Hi girls and hi ziabls</h2>
-			</header>
-		</div>
-	);
+class StartPage extends React.Component{
+	render(){
+		return(
+			<div>
+				<header>
+					<h1>GUARANTEES OF OUR SUCCESS</h1>
+				</header>
+				<ListItems listData = {this.props.store.getState().StartPage.listData}/>
+			</div>
+		);
+	}
 }
 
 export default StartPage;
