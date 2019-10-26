@@ -1,0 +1,41 @@
+.mainform form{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+}
+.mainform{
+	width: 90%;
+	margin: auto;
+	background-color: #cdcbf5;
+	padding: 15px;
+}
+.mainform h2{
+	text-align: center;
+}
+
+.mainform label{
+	color: #3e3c63;
+	font-size: 1em;
+	font-family: "Delivery",Verdana,sans-serif;
+}
+.maiform select{
+	-webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+	font-family: "Delivery",Verdana,sans-serif;
+    font-size: 16px;
+    display: inline-block;
+	  width: 160px;
+	  height: 34px;
+	  line-height: 30px;
+	  position: relative;
+	  color: blue;
+
+}
+.select:before{
+	content: ">";
+}
+.mainform option{
+	padding: 10px;
+	margin: 15px;
+}
