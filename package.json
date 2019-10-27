@@ -11,6 +11,7 @@
     "react": "^16.10.1",
     "react-dom": "^16.10.1",
     "react-headroom": "^3.0.0",
+    "react-icons": "^3.8.0",
     "react-router-dom": "^5.1.1",
     "react-scripts": "3.1.2",
     "react-sticky-header": "^0.2.0",

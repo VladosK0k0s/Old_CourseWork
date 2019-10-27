@@ -2,9 +2,11 @@
 	margin-top: 50px;
 	text-align: center;
 	color: white;
-	padding: 20px;
 	background-color: #4d4852;
 	position: absolute; 
 	bottom: 0;
 	width: 100%;
+}
+.main p{
+	padding: 10px;
 }

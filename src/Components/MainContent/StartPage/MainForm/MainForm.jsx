@@ -61,7 +61,7 @@ const MainForm = (props) =>{
 					</select>
 				</div>
 				<div>
-					<label htmlFor="timeSelect" >Total Size</label>
+					<label htmlFor="timeSelect" >Delivery Time</label>
 					<br/>
 					<select name="timeSelect">
 						<option key={0} defaultValue="Choose time" hidden >Choose delivery time</option>

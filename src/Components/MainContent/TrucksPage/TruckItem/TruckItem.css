@@ -1,0 +1,35 @@
+.truckBlock{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	border: 3px solid aqua;
+	border-radius: 50px;
+	margin: 20px;
+	padding: 30px;
+}
+.truckBlock img{
+	margin: 10px;
+	width: 500px;
+}
+.truckBlock .truckinfo{
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+}
+.truckBlock input{
+	background-color: #323a52; /* Grey */
+  	border: none;
+  	color: white;
+  	padding: 15px 32px;
+  	text-align: center;
+  	text-decoration: none;
+  	display: inline-block;
+  	font-size: 16px;
+  	transition: .2s;
+}
+.truckBlock input:hover{
+	background-color: aqua;
+}
+.truckBlock input:active{
+	transform: scale(0.9);
+}

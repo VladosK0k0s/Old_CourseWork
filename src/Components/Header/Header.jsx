@@ -20,7 +20,7 @@ const Header = () =>{
 							Telegram: @micro4elik
 						</div>
 						<div className={classes.block}>
-							Skype: p.s.vlad200@ukr.net
+							Skype: p.s.vlad2000@ukr.net
 						</div>
 				</div>
 				<div className={classes.h_2}>
