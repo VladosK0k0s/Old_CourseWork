@@ -6,6 +6,8 @@
 	border-radius: 50px;
 	margin: 20px;
 	padding: 30px;
+	-webkit-flex-flow: row wrap;
+	flex-flow: wrap;
 }
 .truckBlock img{
 	margin: 10px;

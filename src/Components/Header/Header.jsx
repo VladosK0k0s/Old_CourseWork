@@ -4,7 +4,7 @@ import {NavLink} from 'react-router-dom'
 import 'react-sticky-header/styles.css';
 import Headroom from 'react-headroom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHome } from '@fortawesome/free-solid-svg-icons'
+import { faHome, faCogs } from '@fortawesome/free-solid-svg-icons'
 
 
 
@@ -32,7 +32,12 @@ const Header = () =>{
 						<NavLink className={classes.bar} to = '/task1'>
 							Task 1
 						</NavLink>
-						<NavLink className={classes.bar} to = '/task2'>Task 2</NavLink>
+						<NavLink className={classes.bar} to = '/task2'>
+							Task 2
+						</NavLink>
+						<NavLink className={classes.bar} to = '/services'>
+							<FontAwesomeIcon icon={faCogs} size='2x'/> Services
+						</NavLink>
 					</div>
 				</div>	
 			</div>

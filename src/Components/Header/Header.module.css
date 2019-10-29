@@ -1,3 +1,18 @@
+@media all and (max-width: 650px){
+	.bars{
+		flex-direction: column;
+		text-align: center;
+
+	}
+	.h_2 img{
+		display: none;
+	}
+	.bar:hover{
+	  	transform: scale(1.0);
+	}
+}
+
+
 .h_1{
 	background-color: #444444;
 	display: flex;

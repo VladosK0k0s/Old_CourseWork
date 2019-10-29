@@ -1,0 +1,23 @@
+.driversMain h1{
+	text-align: center;
+	color: aqua;
+}
+.driversMain > div{
+	display: flex;
+	flex-direction: row;
+	margin: 20px;
+}
+.driversMain img{
+	width:300px;
+	height: 250px;
+}
+.driverItem{
+	display: flex;
+	text-align: center;
+	align-items: center;
+	color: red;
+	transition: 1.6s
+}
+.driverItem > div >*:hover{
+	color: blue;
+}
