@@ -24,7 +24,9 @@ const Header = () =>{
 						</div>
 				</div>
 				<div className={classes.h_2}>
-					<img src="https://www.codester.com/static//uploads/items/10227/preview-xl.jpg" alt="logo"/>
+					<NavLink to = '/'>
+						<img src="https://www.codester.com/static//uploads/items/10227/preview-xl.jpg" alt="logo"/>
+					</NavLink>
 					<div  className={classes.bars}>
 						<NavLink className={classes.bar} to = '/'>
 							<FontAwesomeIcon icon={faHome} size='2x'/> Hom

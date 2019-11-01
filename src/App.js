@@ -5,16 +5,18 @@ import MainContent from './Components/MainContent/MainContent.jsx'
 import {BrowserRouter} from 'react-router-dom'
 import Footer from './Components/Footer/Footer.jsx'
 
-function App(props) {
-  return (
-    <BrowserRouter>
-    <div className='App-wrapper'>
-        <Header/>
-        <MainContent store = {props.store}/>
-      	<Footer/>
-    </div>
-    </BrowserRouter>
-  );
+class App extends React.Component {
+	render(){
+	  return (
+	    <BrowserRouter>
+	    <div className='App-wrapper'>
+	        <Header/>
+	        <MainContent store = {this.props.store}/>
+	      	<Footer/>
+	    </div>
+	    </BrowserRouter>
+	  );
+  	}
 }
 
 export default App;
