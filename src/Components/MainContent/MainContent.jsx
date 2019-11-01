@@ -7,6 +7,7 @@ import StartPage from './StartPage/StartPage.jsx'
 import TrucksPage from './TrucksPage/TrucksPage.jsx'
 import ServicesPage from './ServicesPage/ServicesPage.jsx'
 import DriversPage from './DriversPage/DriversPage.jsx'
+import ClientsPage from './ClientsPage/ClientsPage.jsx'
 
 const MainContent = (props) =>{
 	return (
@@ -16,6 +17,7 @@ const MainContent = (props) =>{
             <Route path = '/task2' render = {() => <Task2/>}/>
             <Route path = '/Trucks' render = {() => <TrucksPage data={props.store.getState().TrucksPage} />}/>
             <Route path = '/services' render = {() => <ServicesPage />}/>
+            <Route path = '/Clients' render = {() => <ClientsPage />}/>
             <Route path = '/Drivers' render = {() => <DriversPage data={props.store.getState().DriversPage} />}/>
 
         </div>

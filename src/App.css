@@ -5,4 +5,9 @@ button{
 	position:relative; 
 	min-height:300%;
 	padding-bottom: 100px;
+	font-family: ProximaNova,sans-serif;
+	color: rgb(67, 67, 67);
+	line-height: 1.5;
+	font-weight: 400;
+	font-size: 14px;
 }

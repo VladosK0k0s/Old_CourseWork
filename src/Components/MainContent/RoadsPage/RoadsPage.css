@@ -27,10 +27,10 @@
 	margin-left: 20px;
 	margin-right: 20px;
 }
-.serviceitem h3::first-letter{
+.serviceitem h3:first-letter{
 	color: blue;
 }
-.serviceitem h3::after{
+.serviceitem h3:after{
 	content: '  \2b9a';
 }
 .serviceitem h3{

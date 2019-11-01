@@ -1,0 +1,18 @@
+@media all and (max-width: 1000px){
+	
+}
+.clientsMain > ul > li{
+	list-style-type: none; 
+
+}
+.clientsMain ul {
+    margin-left: 0;
+    padding-left: 0; 
+}
+.clientsMain > ul > li::before{
+	font-size: 15px;
+	color: blue;
+	content: '⁕';
+	padding: 10px;
+}
+
