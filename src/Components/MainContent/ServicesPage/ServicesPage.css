@@ -26,6 +26,7 @@
 	align-items: center;
 	margin-left: 20px;
 	margin-right: 20px;
+	transition: .5s;
 }
 .serviceitem h3::first-letter{
 	color: blue;

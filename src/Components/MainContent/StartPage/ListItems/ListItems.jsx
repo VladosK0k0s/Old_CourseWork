@@ -13,7 +13,7 @@ const ListItems = (props) =>{
 				props.listData.map((el=>{
 					return(
 						<li key = {el.iconid}>
-							<NavLink className='barlink' to = {`/${el.name}`}>
+							<NavLink className='barlink' to = {`/content/${el.name}`}>
 								<FontAwesomeIcon className='icon' icon={icons[el.iconid]} size='5x'/>
 								<div>{el.count}</div>
 								<div>{el.name}</div>

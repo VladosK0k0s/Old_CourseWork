@@ -27,7 +27,6 @@ hr{
 .form1 input{
 	padding: 10px;
 	margin:5%;
-	border: 1px solid blue;
 	border-radius: 10px;
 }
 .form1 input:focus {

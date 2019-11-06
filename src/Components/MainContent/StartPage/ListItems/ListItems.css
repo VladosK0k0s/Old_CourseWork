@@ -14,9 +14,6 @@
 	text-align: center;
 	padding: 10px;
 }
-.mainlist > li:hover{
-	transform: scale(1.12);
-}
 .icon{
 	display: block;
 	margin: auto;
@@ -25,6 +22,9 @@
 	text-decoration: none;
 	pointer-events: none;
 	pointer-events: none;
+}
+.mainlist > li:hover{
+	transform: scale(1.12);
 }
 .barlink:active{
 	color: black;

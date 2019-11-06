@@ -2,7 +2,6 @@
 	.bars{
 		flex-direction: column;
 		text-align: center;
-
 	}
 	.h_2 img{
 		display: none;
@@ -11,8 +10,14 @@
 	  	transform: scale(1.0);
 	}
 }
-
-
+.upToTop{
+	cursor: pointer;
+	position: fixed;
+	font-size: 30px;
+	font-weight: 900;
+	right: 5%;
+	bottom: 5%;
+}
 .h_1{
 	background-color: #444444;
 	display: flex;
@@ -24,33 +29,46 @@
 	color: #eeeeee;
 }
 .h_2{
-	background-color: #00b2dd;
 	display: flex;
 }
 .h_2 img{
-	left: 10px;
-	width: 200px;
 	height: 100%;
+	width: 80px;
 }
 .h_2 .bars{
+	background-color: #00b2dd;
 	width: 100%;
-	margin: auto;
 	display: flex;
-	justify-content: space-around;
+	justify-content: space-between;
+	align-items: center;
+}
+.sign{
+	display: flex;
+	flex-direction: column;
+}
+.signin{
+	border: 1px solid black;
+	border-radius: 10px;
+	overflow: auto;
 }
 .bar{
-  padding: 20px;
-  transition: ease-out .3s;
-  text-decoration: none;
-  color: black;
+	border-radius: 50%;
+	margin-right: 10px;
+	margin-left: 10px;
+
+    transition: ease-out .3s;
+    text-decoration: none;
+    color: black;   
+}
+.bar > div{
+    padding: 10px;
 }
 .bar:visited{
 	color: black;
 }
 .bar:hover{
-	background-color: #0080ff;
-  	transform: scale(1.2);
+	background-image: radial-gradient(ellipse at 50%, #0080ff, #00b2dd, aqua);  
 }
 .bar:active{
-  color:pink;
+	color:pink;
 }

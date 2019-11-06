@@ -2,16 +2,16 @@ import React from 'react';
 import classes from './Header.module.css'
 import {NavLink} from 'react-router-dom'
 import 'react-sticky-header/styles.css';
-import Headroom from 'react-headroom';
+//import Headroom from 'react-headroom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHome, faCogs } from '@fortawesome/free-solid-svg-icons'
+import { Link } from "react-scroll";
 
 
 
-const Header = () =>{
+const Header = (props) =>{
     return(
-    	<Headroom>
-	   		<div>		
+	   		<div id='s1'>		
 				<div className={classes.h_1}>
 						<div className={classes.block}>
 							Tel: +380678046748
@@ -23,27 +23,50 @@ const Header = () =>{
 							Skype: p.s.vlad2000@ukr.net
 						</div>
 				</div>
+
 				<div className={classes.h_2}>
 					<NavLink to = '/'>
-						<img src="https://www.codester.com/static//uploads/items/10227/preview-xl.jpg" alt="logo"/>
+						<img src={props.store.getState().HeaderPage.link} alt="logo"/>
 					</NavLink>
 					<div  className={classes.bars}>
 						<NavLink className={classes.bar} to = '/'>
-							<FontAwesomeIcon icon={faHome} size='2x'/> Hom
+							<div>
+								<FontAwesomeIcon icon={faHome} size='2x'/> 
+								Hom
+							</div>
 						</NavLink>
-						<NavLink className={classes.bar} to = '/task1'>
-							Task 1
+						<NavLink className={classes.bar} to = '/content/task1'>
+							<div>Task 1</div>
 						</NavLink>
-						<NavLink className={classes.bar} to = '/task2'>
-							Task 2
+						<NavLink className={classes.bar} to = '/content/task2'>
+							<div>Task 2</div>
 						</NavLink>
-						<NavLink className={classes.bar} to = '/services'>
-							<FontAwesomeIcon icon={faCogs} size='2x'/> Services
+						<NavLink className={classes.bar} to = '/content/services'>
+							<div>
+								<FontAwesomeIcon icon={faCogs} size='2x'/> 
+								Services
+							</div>
 						</NavLink>
+						<div className={classes.sign}>
+							<NavLink className={classes.bar} to = '/signIn'>
+								<div className={classes.signin}>Sign In</div>
+							</NavLink>
+							<NavLink className={classes.bar} to = '/signUp'>
+								<div>Sign Up</div>
+							</NavLink>
+						</div>
 					</div>
-				</div>	
+				</div>
+				<Link
+	                activeClass="active"
+	                to="s1"
+	                spy={true}
+	                smooth={true}
+	                offset={-70}
+	                duration={1000}
+	              ><div className={classes.upToTop}>/\</div>
+				</Link>	
 			</div>
-		</Headroom>
     );
 }
 export default Header;

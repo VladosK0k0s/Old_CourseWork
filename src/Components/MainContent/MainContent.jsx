@@ -11,15 +11,15 @@ import ClientsPage from './ClientsPage/ClientsPage.jsx'
 
 const MainContent = (props) =>{
 	return (
-		<div className={classes.main}> 
-			<Route exact path = '/'  render = {() => <StartPage data={props.store.getState().StartPage} />}/>
-            <Route path = '/task1' render = {() => <Task1/>}/>
-            <Route path = '/task2' render = {() => <Task2/>}/>
-            <Route path = '/Trucks' render = {() => <TrucksPage data={props.store.getState().TrucksPage} />}/>
-            <Route path = '/services' render = {() => <ServicesPage />}/>
-            <Route path = '/Clients' render = {() => <ClientsPage />}/>
-            <Route path = '/Drivers' render = {() => <DriversPage data={props.store.getState().DriversPage} />}/>
-
+		<div className={classes.main}>
+            <Route exact path ='/Old_CourseWork/' render = {() => <StartPage data={props.store.getState().StartPage} />}/> 
+            <Route exact path = '/'  render = {() => <StartPage data={props.store.getState().StartPage} />}/> 
+            <Route path = '/content/task1' render = {() => <Task1/>}/>
+            <Route path = '/content/task2' render = {() => <Task2/>}/>
+            <Route path = '/content/Trucks' render = {() => <TrucksPage data={props.store.getState().TrucksPage} />}/>
+            <Route path = '/content/services' render = {() => <ServicesPage />}/>
+            <Route path = '/content/Clients' render = {() => <ClientsPage />}/>
+            <Route path = '/content/Drivers' render = {() => <DriversPage data={props.store.getState().DriversPage} />}/>
         </div>
 	);
 }

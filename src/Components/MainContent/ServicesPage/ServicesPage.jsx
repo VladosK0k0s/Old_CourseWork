@@ -18,7 +18,10 @@ class ServicesPage extends React.Component{
 					<div className="serviceitem">
 						<ReactFancyBox image={s1}
 						defaultThumbnailWidth={250}
-						defaultThumbnailHeight={200}/>
+						defaultThumbnailHeight={200}
+						onOpen={function ol (argument) {
+							console.log(1);
+						}}/>
 						<Link
 			                activeClass="active"
 			                to="section1"
