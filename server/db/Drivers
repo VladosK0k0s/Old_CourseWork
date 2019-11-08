@@ -1,0 +1,15 @@
+DROP TABLE IF EXISTS `Drivers`;
+CREATE TABLE IF NOT EXISTS `Drivers` (
+    `id` int unsigned NOT NULL AUTO_INCREMENT,
+    `tel` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+    `card_number` int unsigned NOT NULL,
+    `first_name` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+    `last_name` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+    `age` int unsigned NOT NULL,
+    `reg_date` date NOT NULL,
+    PRIMARY KEY (id)
+)ENGINE=INNODB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;;
+CREATE TRIGGER `date_trigger` 
+BEFORE INSERT ON `Drivers`
+FOR EACH ROW
+    SET New.reg_date = CURDATE()

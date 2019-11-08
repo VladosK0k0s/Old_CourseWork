@@ -2,22 +2,24 @@ import React from 'react';
 import './TruckItem.css';
 
 
-const TruckItem = (props) =>{
-	return(
-		<div className='truckBlock'>
-			<img src={props.imglink} alt={`truck${props.data.id}`}/>
-			<div className='truckinfo'>
-				<div>
-					<h3>Carriage Capacity: {props.data.carcap} <i>kg</i></h3>
-					<h4>Volume: Up To {props.data.maxvolume} <i>m{`\u00B3`}</i></h4>
-					<p>Price for 1km: {props.data.price} <i>UAH</i></p>
-					<p>Minimum distance: {props.data.minkm} <i>km</i></p>
+class TruckItem extends React.Component{
+	render(){
+		return(
+			<div className='truckBlock'>
+				<img src={this.props.imglink} alt={`truck`}/>
+				<div className='truckinfo'>
+					<div>
+						<h3>Carriage Capacity: {this.props.data.cariage} <i>kg</i></h3>
+						<h4>Volume: Up To {this.props.data.volume} <i>m{`\u00B3`}</i></h4>
+						<p>Price for 1km: {this.props.data.price1km} <i>UAH</i></p>
+						<p>Minimum distance: {this.props.data.minDistance} <i>km</i></p>
+					</div>
+					<input type="submit" value="Call Us!"/>
 				</div>
-				<input type="submit" value="Call Us!"/>
 			</div>
-		</div>
 
-	)
+		)
+	}
 }
 
 export default TruckItem;

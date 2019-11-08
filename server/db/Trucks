@@ -1,0 +1,74 @@
+DROP TABLE IF EXISTS `Trucks`;
+CREATE TABLE IF NOT EXISTS `Trucks` (
+    `id` int unsigned NOT NULL AUTO_INCREMENT,
+    `reg_number` int unsigned NOT NULL,
+    `mileage` int unsigned NOT NULL,
+    `reg_date` date NOT NULL,
+    `cariage` int unsigned NOT NULL,
+    `volume` int unsigned NOT NULL,
+    `price1km` int unsigned NOT NULL,
+    `minDistance` int unsigned NOT NULL,
+    PRIMARY KEY (id)
+)ENGINE=INNODB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;;
+CREATE TRIGGER `date_trigger` 
+BEFORE INSERT ON `Trucks`
+FOR EACH ROW
+    SET New.reg_date = CURDATE()
+
+Створення процедури вставки запису в таблицю
+
+DELIMITER //
+CREATE PROCEDURE `ins`(
+    IN `t_mileage` int unsigned, 
+    IN `t_reg_number` int unsigned,
+    IN `t_cariage` int unsigned,
+    IN `t_volume` int unsigned,
+    IN `t_price1km` int unsigned,
+    IN `t_minDistance` int unsigned
+)
+BEGIN
+  INSERT INTO `Trucks`(`reg_number`, `mileage`, `cariage`, `volume`, `price1km`, `minDistance`) 
+  VALUES(`t_reg_number`, `t_mileage`, `t_cariage`, `t_volume`, `t_price1km`, `t_minDistance`);
+END //
+
+Створення процедури модифікації запису таблиці
+
+DELIMITER //
+CREATE PROCEDURE `mod`(
+	IN `t_id` int unsigned,
+    IN `t_mileage` int unsigned, 
+    IN `t_cariage` int unsigned,
+    IN `t_volume` int unsigned,
+    IN `t_price1km` int unsigned,
+    IN `t_minDistance` int unsigned
+)
+BEGIN
+	UPDATE `Trucks` SET `mileage`=t_mileage, `cariage`=t_cariage, `volume`=t_volume, `price1km`=t_price1km, `minDistance`=t_minDistance	
+WHERE `id`=t_id;
+END //
+
+Створення процедури видалення запису з таблиці
+
+DELIMITER //
+CREATE PROCEDURE `del`(
+    IN `t_id` int unsigned
+)
+BEGIN
+DELETE FROM `Trucks` WHERE `id`=t_id;
+END //
+
+
+INSERT INTO `Trucks`(`reg_number`, `mileage`, `cariage`, `volume`, `price1km`, `minDistance`) 
+  VALUES(1212564, 100000, 5000, 55, 30, 400);
+
+INSERT INTO `Trucks`(`reg_number`, `mileage`, `cariage`, `volume`, `price1km`, `minDistance`) 
+  VALUES(1516723, 200000, 7000, 55, 50, 500);
+
+INSERT INTO `Trucks`(`reg_number`, `mileage`, `cariage`, `volume`, `price1km`, `minDistance`) 
+  VALUES(5476890, 500000, 15000, 120, 100, 500);
+  
+INSERT INTO `Trucks`(`reg_number`, `mileage`, `cariage`, `volume`, `price1km`, `minDistance`) 
+  VALUES(4728400, 300000, 1500, 17, 20, 50);
+
+
+	

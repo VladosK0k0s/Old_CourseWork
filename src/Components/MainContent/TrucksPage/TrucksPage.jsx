@@ -9,12 +9,29 @@ import truck4 from './truck4.png'
 let links = [truck1,truck2,truck3,truck4];
 
 class TrucksPage extends React.Component{
+	constructor(props) {
+	  super(props);
+	
+	  this.state = {
+	  	trucks: [] // id, cariage, mileage, minDistance, price1km, reg_date, reg_number, volume
+	  };
+	}
+	componentDidMount(){
+		this.getTrucks();
+	}
+	getTrucks(){
+		fetch('http://localhost:4000/Trucks')
+			.then(res => res.json())
+			.then(res =>this.setState({trucks: res.data}))
+			.catch(err=>console.log(err))
+	}
 	render(){
+		const trucks = this.state.trucks;
 		return(
 			<div className='trucksMain'>
 				<h1>Our Trucks</h1>
 				{
-					this.props.data.TrucksData.map(el=>{
+					trucks.map(el=>{
 						return(
 							<div key={el.id}>
 								<TruckItem imglink={links[el.id-1]} data={el} />
