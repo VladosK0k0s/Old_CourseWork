@@ -1,7 +1,9 @@
+const {EnterData}  = require('./MysqlData.js');
 const express    = require('express');
 const bodyParser = require('body-parser');
 const mysql      = require('mysql');
 const cors       = require('cors');
+
 
 // Initialize the app
 const app = express();
@@ -10,13 +12,7 @@ app.use(cors());
 
 const SelectTrucks = 'SELECT * FROM Trucks';
 
-const connection = mysql.createConnection({
-  host     : 'zanner.org.ua',
-  port     : '33321',
-  user     : 'ka7516',
-  password : '4NId2owTIUsyaqwF',
-  database : 'ka7516'
-});
+const connection = mysql.createConnection(EnterData);
 
 connection.connect(err=>{
   if(err) return err;
