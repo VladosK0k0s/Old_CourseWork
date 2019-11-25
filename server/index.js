@@ -11,6 +11,7 @@ const app = express();
 app.use(cors());
 
 const SelectTrucks = 'SELECT * FROM Trucks';
+const SelectDrivers = 'SELECT * FROM Drivers';
 
 const connection = mysql.createConnection(EnterData);
 
@@ -22,9 +23,20 @@ app.get('/', (req, res) =>{
   res.send('Hi girls and ziabls');
 })
 
-// https://expressjs.com/en/guide/routing.html
 app.get('/Trucks', (req, res) => {
   connection.query(SelectTrucks, (error, results) => {
+    if (error){
+      res.send(error);
+    }
+    else{
+      return res.json({
+        data: results
+      })
+    }
+  });
+});
+app.get('/Drivers', (req, res) => {
+  connection.query(SelectDrivers, (error, results) => {
     if (error){
       res.send(error);
     }

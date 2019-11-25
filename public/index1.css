@@ -1,0 +1,16 @@
+@font-face{
+font-family: 'Formular-Regular';
+src: url('./fonts/Formular-Regular.eot');
+src: url('./fonts/Formular-Black.eot?iefix') format('eot'),
+	url('./fonts/Formular-Regular.woff') format('woff'),
+	url('./fonts/Formular-Regular.ttf') format('truetype'),
+	url('./fonts/Formular-Regular.svg#webfont') format('svg');
+}
+@font-face{
+font-family: 'Formular-Black';
+src: url('./fonts/Formular-Black.eot');
+src: url('./fonts/Formular-Black.eot?iefix') format('eot'),
+	url('./fonts/Formular-Black.woff') format('woff'),
+	url('./fonts/Formular-Black.ttf') format('truetype'),
+	url('./fonts/Formular-Black.svg#webfont') format('svg');
+}

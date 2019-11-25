@@ -3,11 +3,13 @@ import classes from './MainContent.module.css'
 import {Route} from 'react-router-dom'
 import Task1 from './Task1/Task1.jsx'
 import Task2 from './Task2/Task2.jsx'
+import Task3 from './Task3/Task3.jsx'
 import StartPage from './StartPage/StartPage.jsx'
 import TrucksPage from './TrucksPage/TrucksPage.jsx'
 import ServicesPage from './ServicesPage/ServicesPage.jsx'
 import DriversPage from './DriversPage/DriversPage.jsx'
 import ClientsPage from './ClientsPage/ClientsPage.jsx'
+
 
 const MainContent = (props) =>{
 	return (

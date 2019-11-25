@@ -26,12 +26,11 @@ class TrucksPage extends React.Component{
 			.catch(err=>console.log(err))
 	}
 	render(){
-		const trucks = this.state.trucks;
 		return(
 			<div className='trucksMain'>
 				<h1>Our Trucks</h1>
 				{
-					trucks.map(el=>{
+					this.state.trucks.map(el=>{
 						return(
 							<div key={el.id}>
 								<TruckItem imglink={links[el.id-1]} data={el} />

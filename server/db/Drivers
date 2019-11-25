@@ -2,14 +2,26 @@ DROP TABLE IF EXISTS `Drivers`;
 CREATE TABLE IF NOT EXISTS `Drivers` (
     `id` int unsigned NOT NULL AUTO_INCREMENT,
     `tel` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
-    `card_number` int unsigned NOT NULL,
+    `card_number` bigint unsigned NOT NULL,
     `first_name` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
     `last_name` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
     `age` int unsigned NOT NULL,
     `reg_date` date NOT NULL,
     PRIMARY KEY (id)
 )ENGINE=INNODB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;;
-CREATE TRIGGER `date_trigger` 
+CREATE TRIGGER `date_drivers_trigger` 
 BEFORE INSERT ON `Drivers`
 FOR EACH ROW
     SET New.reg_date = CURDATE()
+
+
+INSERT INTO `Drivers`(`tel`, `card_number`, `first_name`, `last_name`, `age`) 
+  VALUES(0671488228, 1234000984562245, 'Валерий', 'Жмышенко', 54);
+
+INSERT INTO `Drivers`(`tel`, `card_number`, `first_name`, `last_name`, `age`) 
+  VALUES(0675353535, 1111222233334444, 'Денис', 'Петров', 27);
+
+INSERT INTO `Drivers`(`tel`, `card_number`, `first_name`, `last_name`, `age`) 
+  VALUES(0661534899, 5375414113568447, 'Владислав', 'Степанюк', 19);
+INSERT INTO `Drivers`(`tel`, `card_number`, `first_name`, `last_name`, `age`) 
+  VALUES(0991524798, 1488228834009511, 'Dead', 'Inside', 12);

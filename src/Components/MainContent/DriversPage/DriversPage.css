@@ -33,3 +33,6 @@
 .driverItem > div >*:hover{
 	color: blue;
 }
+.driverItem > div{
+	padding-left: 20px;
+}

@@ -1,0 +1,28 @@
+DROP TABLE IF EXISTS `Driver_Truck`;
+CREATE TABLE IF NOT EXISTS `Driver_Truck` (
+    `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+    `driver_id` int unsigned NOT NULL,
+    `truck_id` int unsigned NOT NULL,
+    `reg_date` date NOT NULL,
+    PRIMARY KEY (id)
+)ENGINE=INNODB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;;
+CREATE TRIGGER `date_driver_truck_trigger` 
+BEFORE INSERT ON `Driver_Truck`
+FOR EACH ROW
+    SET New.reg_date = CURDATE()
+
+
+INSERT INTO `Driver_Truck`(`driver_id`, `truck_id`) 
+  VALUES(1, 1);
+INSERT INTO `Driver_Truck`(`driver_id`, `truck_id`) 
+  VALUES(1, 2);
+INSERT INTO `Driver_Truck`(`driver_id`, `truck_id`) 
+  VALUES(1, 4);  
+INSERT INTO `Driver_Truck`(`driver_id`, `truck_id`) 
+  VALUES(2, 1);
+INSERT INTO `Driver_Truck`(`driver_id`, `truck_id`) 
+  VALUES(2, 3);
+INSERT INTO `Driver_Truck`(`driver_id`, `truck_id`) 
+  VALUES(3, 2);
+INSERT INTO `Driver_Truck`(`driver_id`, `truck_id`) 
+  VALUES(3, 4);

@@ -1,9 +1,8 @@
 .main{
-	margin-top: 500px;
+	margin-top: 50px;
+	flex: 0 0 auto;
 	text-align: center;
 	color: white;
 	background-color: #4d4852;
-	position: absolute; 
-	bottom: 0;
 	width: 100%;
 }
