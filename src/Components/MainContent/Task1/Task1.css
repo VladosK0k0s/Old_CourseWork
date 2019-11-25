@@ -1,0 +1,65 @@
+.handleblock h2{
+	font-family: 'Formular-Regular';
+	    font-weight: 900;
+	text-align: left;
+}
+
+.handleblock button{
+	cursor: pointer;
+	outline: none;
+	font-family: 'Formular-Regular';
+	font-weight: 900;
+	font-size: 20px;
+	border: 1px solid #10c8d2;
+	border-radius: 4px;
+	padding: 13px 25px;
+	color: #10c8d2;
+	background-color: #fff;
+	transition: .225s;
+}
+.handleblock button:hover{
+	color:  #fff;
+	background-color: #10c8d2;
+}
+.Submit p{
+	margin-top: 50px;
+}
+.Submit button{
+	cursor: pointer;
+	outline: none;
+	font-family: 'Formular-Regular';
+	font-weight: 900;
+	font-size: 14px;
+	border: 1px solid #10c8d2;
+	border-radius: 4px;
+	padding: 6px 15px;
+	color: #10c8d2;
+	background-color: #fff;
+	transition: .225s;
+}
+.Submit button:hover{
+	color:  #fff;
+	background-color: #10c8d2;
+}
+button{
+	margin-top: 20px;
+	cursor: pointer;
+	outline: none;
+	font-family: 'Formular-Regular';
+	font-weight: 900;
+	font-size: 14px;
+	border: 1px solid #10c8d2;
+	border-radius: 4px;
+	padding: 3px 5px;
+	color: #10c8d2;
+	background-color: #fff;
+	transition: .225s;
+}
+.pascal p{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+}
+.pascal p > span{
+	padding: 5px;
+}
