@@ -1,0 +1,35 @@
+.MainForm{
+	margin: 5%;
+	height: 200px;
+	form{
+		display: flex;
+		flex-direction: row;
+		justify-content: space-around;
+	}
+	
+	background-color: #cdcbf5;
+	h2{
+		text-align: center;
+	}
+	label{
+		color: #3e3c63;
+		font-size: 1em;
+		font-family: "Delivery",Verdana,sans-serif;
+	}
+	option{
+		padding: 10px;
+		margin: 15px;
+	}
+	.buttonWrapper{
+		margin-top: 20px;
+		button{
+			display: block;
+			padding: 15px 30px;
+			margin: auto;
+		}
+	}
+}
+@media all and (min-width: 650px){
+	.mainform form{
+	}
+}

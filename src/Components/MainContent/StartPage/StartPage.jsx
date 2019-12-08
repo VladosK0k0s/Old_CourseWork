@@ -1,5 +1,5 @@
 import React from 'react';
-import './StartPage.css'
+import './StartPage.scss'
 import ListItems from './ListItems/ListItems.jsx'
 import MainForm from './MainForm/MainForm.jsx'
 
@@ -7,7 +7,7 @@ import MainForm from './MainForm/MainForm.jsx'
 class StartPage extends React.Component{
 	render(){
 		return(
-			<div>
+			<div className='StartPage'>
 				<header>
 					<h1>GUARANTEES OF OUR SUCCESS</h1>
 				</header>

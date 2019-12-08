@@ -8,11 +8,11 @@ CREATE TABLE IF NOT EXISTS `Drivers` (
     `age` int unsigned NOT NULL,
     `reg_date` date NOT NULL,
     PRIMARY KEY (id)
-)ENGINE=INNODB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;;
+)ENGINE=INNODB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 CREATE TRIGGER `date_drivers_trigger` 
 BEFORE INSERT ON `Drivers`
 FOR EACH ROW
-    SET New.reg_date = CURDATE()
+    SET New.reg_date = CURDATE();
 
 
 INSERT INTO `Drivers`(`tel`, `card_number`, `first_name`, `last_name`, `age`) 

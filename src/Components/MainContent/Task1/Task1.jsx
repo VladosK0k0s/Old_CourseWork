@@ -43,111 +43,114 @@ class Task1 extends React.Component{
 	  	mas: [],
 	  	pascalHeight: '',
 	  	pascalPiramid: []
-	  };
-	  this.handleClick = this.handleClick.bind(this);
+		};
+		
 	  this.handleSubmit = this.handleSubmit.bind(this);
 	  this.Sum = this.Sum.bind(this);
 	  this.Mas = this.Mas.bind(this);
 	  this.handleInputChange = this.handleInputChange.bind(this);
 	  this.handlePascal = this.handlePascal.bind(this);
 	}
-	handleClick(event){
+	
+	handleClick = (event) => {
 		event.target.blur();
 		const name = prompt('Enter Your Name');
-		this.setState({
-			name: name.toString()
-		});
+		this.setState({ name });
+
 		const age = prompt('Enter Your Age');
-		this.setState({
-			age: age
-		});
+		this.setState({ age });
+
 		const sex = prompt('Enter Your $\u2140\u2716 (man or woman)');
 		this.setState({
 			sex: sex
 		});
-		this.setState({
-			age: age
-		});
+
 		const childCount = prompt('Enter Number of Childrens');
 		this.setState({
 			childCount: childCount
 		});
+
 		const country = prompt('Enter Country of Your Birth');
 		this.setState({
 			country: country
 		});
+
 		this.setState({
 			hover: false
 		});
 		event.preventDefault();
 	}
-	handleSubmit(){
+
+	handleSubmit() {
 		let prediction = `Hi, ${this.state.name}! `;
 		prediction += 'You\'ll get married on';
-		if((this.state.sex==='man')||(this.state.sex==='woman')){
+
+		if ((this.state.sex==='man')||(this.state.sex==='woman')) {
 			let nsex = (this.state.sex==='man') ? 1 : 0;
 			let random = Math.floor(Math.random()*names[nsex].length);
 			prediction += ` ${names[nsex][random]} `;
+		} else {
+			prediction += ' Александр';
 		}
-		else prediction += ' Александр';
+
 		let randAge = Number(this.state.age) + Math.floor(Math.random()*6 - 3);
-		prediction += `, ${randAge} y.o. `
+		// fix
+		prediction += `, ${randAge} y.o. `;
 		prediction += `You will be live in ${countries[Math.floor(Math.random()*countries.length)]}`;
 		let randC = Number(this.state.childCount) + Math.floor(Math.random()*2 - 1);
 		prediction += ` and have ${randC} children${((randC===0)||(randC===1)?'':'s')} `;
+
 		this.setState({
-			prediction: prediction
-		});
-		this.setState({
+			prediction: prediction,
 			predictionHover: false
 		});
 	}
+
 	handleInputChange(event){
 		let botlesText = [];
 		for(let i = 0; i < event.target.value; i++){
 			botlesText.push(event.target.value-i);
 		}
+
 		this.setState({
 			bottlesNumber: event.target.value,
 			botlesText: botlesText
 		})
 	}
+
 	handlePascal(event){
+		const pascalHeight = event.target.value;
+		const pascalPiramid = [];
+
 		if(event.target.value !== ''){
-			let N = Number(event.target.value);
-			console.log(N);
-			let piramid = []
-			for(let i = 0; i<=N; i++){
-				piramid[i] = [];
+			let pascalHeight = Number(event.target.value);
+			let pascalPiramid = []
+			for(let i = 0; i<=pascalHeight; i++){
+				pascalPiramid[i] = [];
 				for(let j = 0; j<=i; j++){
-					piramid[i][j] = factorial(i)/(factorial(j)*factorial(i-j));
+					pascalPiramid[i][j] = factorial(i)/(factorial(j)*factorial(i-j));
 				}
 			}
-			this.setState({
-				pascalHeight: N,
-				pascalPiramid: piramid
-			})
 		}
-		else{
-			this.setState({
-				pascalHeight: event.target.value,
-				pascalPiramid: []
-			})
-		}
+
+		this.setState({ pascalHeight, pascalPiramid });
 	}
+
 	Sum(){
 		let sum = 0;
+		// reduce
 		this.state.arr.map(el=>{
 			if(el.value< 100){
 				sum+=el.value
 			}
-		})
-		this.setState({
-			sum: sum
-		})
+		});
+
+		this.setState({ sum });
 	}
+
 	Mas(){
 		let mas = [];
+		// filter + reduce
 		this.state.arr.map(el=>{
 			if(el.type==='EUR'){
 				mas.push({
@@ -173,20 +176,18 @@ class Task1 extends React.Component{
 					<button onClick={this.handleClick}>Click me!</button>
 				</div>
 				<div>
+					{ this.state.name ? <p>Your name: {this.state.name}</p> : '' }
 					{
-						((this.state.name!==null)&&(this.state.name!==''))? <p>Your name: {this.state.name}</p> : ''
+						((this.state.age!==null)&&(this.state.age!=='')) ? <p>Your age: {this.state.age}</p> : ''
 					}
 					{
-						((this.state.age!==null)&&(this.state.age!==''))? <p>Your age: {this.state.age}</p> : ''
+						((this.state.sex!==null)&&(this.state.sex!=='')) ? <p>Your {'$\u2140\u2716'}: {this.state.sex}</p> : ''
 					}
 					{
-						((this.state.sex!==null)&&(this.state.sex!==''))? <p>Your {'$\u2140\u2716'}: {this.state.sex}</p> : ''
+						((this.state.childCount!==null)&&(this.state.childCount!=='')) ? <p>Number of childrens: {this.state.childCount}</p> : ''
 					}
 					{
-						((this.state.childCount!==null)&&(this.state.childCount!==''))? <p>Number of childrens: {this.state.childCount}</p> : ''
-					}
-					{
-						((this.state.country!==null)&&(this.state.country!==''))? <p>Country: {this.state.country}</p> : ''
+						((this.state.country!==null)&&(this.state.country!=='')) ? <p>Country: {this.state.country}</p> : ''
 					}
 					{
 						this.state.hover
@@ -202,32 +203,33 @@ class Task1 extends React.Component{
 						: <p>Prediction for You: {this.state.prediction}</p>
 					}
 				</div>
+
 				<div className='pascal'>
 					<label>
 						Enter piramid Height(starts from 0): 
 						<br/>
 						<input type="text" value={this.state.pascalHeight} onChange={this.handlePascal}/>
 					</label>
+
 					{
-						this.state.pascalPiramid ===[] ? '' :this.state.pascalPiramid.map((el,i)=>{
-							return (
+						this.state.pascalPiramid ===[] ? '' :this.state.pascalPiramid.map((el,i)=> (
 								<p key = {i}>
 									{
-										el.map((ell, i)=>{
-											return (<span key = {i}>{ell}</span>)
-										})
+										el.map((ell, i)=> (<span key = {i}>{ell}</span>))
 									}
 								</p>
 							)
-						})
+						)
 					}
 				</div>
-				<div>
+
+				<div className='bottles'>
 					<label>
 						Enter number of bottles: 
 						<br/>
 						<input type="text" value={this.state.bottlesNumber} onChange={this.handleInputChange}/>
 					</label>
+
 					{
 						this.state.botlesText.map(el=>{
 							if((el===4)||(el===2)||(el===3)){
@@ -242,13 +244,12 @@ class Task1 extends React.Component{
 						})					
 					}
 				</div>
+				
 				<div>
 					<button onClick={this.Sum}>Click</button>
 					<p>Sum: {this.state.sum}</p>
 					<button onClick={this.Mas}>Click</button>
-					<p>Mas: {`[`}{this.state.mas.map(el=>{
-							return `{ value: ${el.value}, type: '${el.type}' }`
-						})}{`]`}
+					<p>Mas: {JSON.stringify(this.state.mas)}
 					</p>
 				</div>
 			</div>

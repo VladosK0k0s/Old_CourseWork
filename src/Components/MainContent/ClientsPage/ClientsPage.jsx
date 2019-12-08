@@ -1,5 +1,5 @@
 import React from 'react';
-import './ClientsPage.css';
+import './ClientsPage.scss';
 import ReactFancyBox from 'react-fancybox'
 import 'react-fancybox/lib/fancybox.css'
 

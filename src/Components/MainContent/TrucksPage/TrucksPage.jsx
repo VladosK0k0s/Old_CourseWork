@@ -1,5 +1,5 @@
 import React from 'react';
-import './TrucksPage.css';
+import './TrucksPage.scss';
 import TruckItem from './TruckItem/TruckItem.jsx'
 import truck1 from './truck1.png'
 import truck2 from './truck2.png'
@@ -19,18 +19,36 @@ class TrucksPage extends React.Component{
 	componentDidMount(){
 		this.getTrucks();
 	}
-	getTrucks(){
+	status = (response) => {  
+		if (response.status >= 200 && response.status < 300) {  
+			return Promise.resolve(response)  
+		} else {  
+			return Promise.reject(new Error(response.statusText))  
+		}  
+	}
+	json = (response) => {  
+		return response.json()  
+	}
+	getTrucks = () => {
+		console.log('gettt');
 		fetch('http://localhost:4000/Trucks')
-			.then(res => res.json())
-			.then(res =>this.setState({trucks: res.data}))
-			.catch(err=>console.log(err))
+			.then(this.status)  
+			.then(this.json)  
+			.then(data => {
+				this.setState({trucks: data.data})  
+				console.log('Request succeeded with JSON response');  
+			}).catch(function(error) {  
+				console.log('Request failed', error);  
+			});
 	}
 	render(){
+		console.log(this.state.trucks);
+		console.log(Object.prototype.toString.call(this.state.trucks));
 		return(
-			<div className='trucksMain'>
+			<div className='TrucksPage'>
 				<h1>Our Trucks</h1>
 				{
-					this.state.trucks.map(el=>{
+					(Object.prototype.toString.call(this.state.trucks) !== "[object Array]"	) ? '' : this.state.trucks.map(el=>{
 						return(
 							<div key={el.id}>
 								<TruckItem imglink={links[el.id-1]} data={el} />

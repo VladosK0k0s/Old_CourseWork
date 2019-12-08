@@ -4,7 +4,6 @@ const bodyParser = require('body-parser');
 const mysql      = require('mysql');
 const cors       = require('cors');
 
-
 // Initialize the app
 const app = express();
 
@@ -16,7 +15,10 @@ const SelectDrivers = 'SELECT * FROM Drivers';
 const connection = mysql.createConnection(EnterData);
 
 connection.connect(err=>{
-  if(err) return err;
+  if(err){
+    console.log(err);
+  }
+   return err
 });
 
 app.get('/', (req, res) =>{
@@ -24,6 +26,7 @@ app.get('/', (req, res) =>{
 })
 
 app.get('/Trucks', (req, res) => {
+  console.log('ii22i');
   connection.query(SelectTrucks, (error, results) => {
     if (error){
       res.send(error);

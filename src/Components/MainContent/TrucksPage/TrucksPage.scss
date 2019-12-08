@@ -1,0 +1,15 @@
+.TrucksPage{
+	padding: 0 10% 5% 10%;
+	background: #037482;
+	h1{
+		margin-top: 0;
+		padding-top: 20px;
+		text-align: center;
+		color: aqua;
+	}
+}
+@media screen and (max-width: 650px){
+	.TrucksPage{
+		padding: 0 2% 2% 2%;
+	}
+}

@@ -1,5 +1,5 @@
 import React from 'react';
-import './DriversPage.css';
+import './DriversPage.scss';
 import d1 from './driver1.jpg';
 import d2 from './driver2.jpg';
 import d3 from './driver3.jpg';
@@ -26,13 +26,17 @@ class DriversPage extends React.Component{
 	}
 	render(){
 		return(
-			<div className='driversMain'>
+			<div className='DriversPage'>
 				<h1>Our Drivers</h1>
 				{
 					this.state.drivers.map(el=>{
 						return(
 							<div className='driverItem' key={el.id}>
-								<img src={links[el.id-1]} alt={`Driver${el.id}`}/>
+								{
+									links[el.id-1]===undefined
+									?<img src="http://placekitten.com/g/200/300" alt=''whoops/>
+									:<img src={links[el.id-1]} alt={`Driver${el.id}`}/>
+								}
 								<div>
 									<h3>{el.first_name}</h3>
 									<h3>{el.last_name}</h3>
