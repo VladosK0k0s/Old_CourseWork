@@ -6,6 +6,7 @@ import {BrowserRouter} from 'react-router-dom'
 import Footer from './Components/Footer/Footer.jsx'
 import {Route} from 'react-router-dom'
 import SignInPage from './Components/SignInPage/SignInPage.jsx'
+import SignUpPage from './Components/SignUpPage/SignUpPage.jsx'
 
 class App extends React.Component {
 	render(){
@@ -13,6 +14,7 @@ class App extends React.Component {
 	    <BrowserRouter>
 		    <div className='App-wrapper'>
 		    	<Route path = '/signIn' render = {() => <SignInPage store = {this.props.store}/>}/>
+					<Route path = '/signUp' render = {() => <SignUpPage store = {this.props.store}/>}/>
 		    	<Route exact path = '/' render = {() => (
 		    						<div>
 			    						<Header store = {this.props.store}/>

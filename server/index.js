@@ -11,6 +11,7 @@ app.use(cors());
 
 const SelectTrucks = 'SELECT * FROM Trucks';
 const SelectDrivers = 'SELECT * FROM Drivers';
+const SelectClients = 'SELECT * FROM Clients';
 
 const connection = mysql.createConnection(EnterData);
 
@@ -26,7 +27,6 @@ app.get('/', (req, res) =>{
 })
 
 app.get('/Trucks', (req, res) => {
-  console.log('ii22i');
   connection.query(SelectTrucks, (error, results) => {
     if (error){
       res.send(error);
@@ -40,6 +40,19 @@ app.get('/Trucks', (req, res) => {
 });
 app.get('/Drivers', (req, res) => {
   connection.query(SelectDrivers, (error, results) => {
+    if (error){
+      res.send(error);
+    }
+    else{
+      return res.json({
+        data: results
+      })
+    }
+  });
+});
+
+app.get('/signUp', (req, res) => {
+  connection.query(SelectClients, (error, results) => {
     if (error){
       res.send(error);
     }
