@@ -1,0 +1,67 @@
+h1{
+	text-align: center;
+}
+.First{
+	padding-left: 10%;
+	label{
+		background-color: aqua;
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		width: 400px;
+		margin: 10px;
+	}
+}
+.Second{
+	padding: 10%;
+	margin-bottom: 500px;
+	table{
+		border: 3px solid black;
+		border-collapse: collapse;
+		thead{
+			background-color: grey;
+			th{
+				width: 150px;
+			}
+		}
+		tbody{
+			tr{
+				td{
+					text-align: center;
+					padding: 10px;
+					>button{
+						margin: 0;
+					}
+				}
+			}
+		}
+	}
+	label{
+		border: 3px solid blue;
+		background-color: aqua;
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		width: 200px;
+		margin: 10px;
+		input{
+			outline: none;
+
+			width: 100px;
+		}
+	}
+	.Diagrama{
+		display: flex;
+		flex-direction: row;
+		align-items: flex-end;
+		border: 2px solid black;
+		>div{
+			margin: 20px 10px 10px 10px;
+			width: 100%;
+			text-align: center;
+			h3{
+				margin: 10px 0 0 0;
+			}
+		}
+	}
+}
