@@ -12,6 +12,7 @@ class Task2 extends React.Component {
 		borderWidth: 2,
 		borderColor: 'red',
 		tableElements: [],
+		alt: '',
 		student: '',
 		mark: '',
 		hidden: true
@@ -39,14 +40,32 @@ class Task2 extends React.Component {
 		if(input.name === 'width') if(input.value<900) this.setState({ width: input.value }, this.styleSet);
 		if(input.name === 'borderWidth') this.setState({ borderWidth: input.value }, this.styleSet);
 		if(input.name === 'borderColor') this.setState({ borderColor: input.value }, this.styleSet);
+		if(input.name === 'alt'){
+			let regexp = /[A-Za-z]/;
+			if(input.value === '') this.setState({alt: input.value});
+			else if(input.value[input.value.length-1].match(regexp) !== null) {
+				console.log('eee')
+				this.setState({alt: input.value});
+			}
+		}
 	}
 	handleSecondClick = (id, event) =>{
 		let newMas = this.state.tableElements.filter((el)=>(el.id!==id));
 		newMas.forEach((el, i)=>el.id=i+1);
-		console.log(newMas);
 		this.setState({
 			tableElements: newMas
 		});
+	}
+	maximum = () =>{
+		let max = this.state.tableElements[0].mark || 0;
+		for(let i = 0; i<this.state.tableElements.length; i++){
+			if(this.state.tableElements[i].mark > max) max = this.state.tableElements[i].mark; 
+		}
+		return max;
+		// return this.state.tableElements.reduce((a,b)=>{
+		// 	console.log(a.mark);
+		// 	return Math.max(a.mark, +b.mark);
+		// });
 	}
 	AddStudent = () =>{
 		this.setState({
@@ -74,7 +93,7 @@ class Task2 extends React.Component {
 		return (
 			<div>
 				<div className='First'>
-					<img style={this.state.style} src={naruto} alt={this.state.alt}/>
+					<img style={this.state.style} src={naruto} title={this.state.alt} alt={this.state.alt}/>
 					<h2>Зміна Розмірів</h2>
 					<label>
 						Висота 
@@ -98,7 +117,7 @@ class Task2 extends React.Component {
 					<br/>
 					<label>
 						Альтернативний текст
-						<input name={'alt'} value={this.state.alt} type="text" onChange={this.handleChange}/>
+						<input name={'alt'} value={this.state.alt} pattern='\[а-яА-ЯЁёъЪ]+' type="text" onChange={this.handleChange}/>
 					</label>
 				</div>
 				<div className='Second'>
@@ -145,8 +164,7 @@ class Task2 extends React.Component {
 					<div className='Diagrama'>
 						{
 							this.state.tableElements.map((el, i) => {
-								console.log(this.randBgc());
-								return <div><div key={i} style={{height: Number(el.mark), background: this.randBgc()}}></div><h3>{el.student}</h3></div>			
+								return <div><div key={i} style={{height: Number(el.mark)*300/this.maximum(), background: this.randBgc()}}></div><h3>{el.student}</h3></div>			
 							}
 										
 							)
