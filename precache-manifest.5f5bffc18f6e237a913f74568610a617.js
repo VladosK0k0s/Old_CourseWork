@@ -1,27 +1,35 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "2df3954c9c40558e542e9b4fc7b43b77",
+    "revision": "a6d8b75be280198b39f2fd74a2f31ddc",
     "url": "/Old_CourseWork/index.html"
   },
   {
-    "revision": "0ddfec6b5cc86b915d02",
+    "revision": "3695233245c7b2ce2e07",
     "url": "/Old_CourseWork/static/css/2.9765426d.chunk.css"
   },
   {
-    "revision": "fc658906ca8ef4e85472",
-    "url": "/Old_CourseWork/static/css/main.cbe32234.chunk.css"
+    "revision": "609847924a9da7996772",
+    "url": "/Old_CourseWork/static/css/main.86d44a3c.chunk.css"
   },
   {
-    "revision": "0ddfec6b5cc86b915d02",
-    "url": "/Old_CourseWork/static/js/2.f50e3b72.chunk.js"
+    "revision": "3695233245c7b2ce2e07",
+    "url": "/Old_CourseWork/static/js/2.eb41500e.chunk.js"
   },
   {
-    "revision": "fc658906ca8ef4e85472",
-    "url": "/Old_CourseWork/static/js/main.fa23a9e2.chunk.js"
+    "revision": "609847924a9da7996772",
+    "url": "/Old_CourseWork/static/js/main.060d10ca.chunk.js"
   },
   {
     "revision": "49ce1dd3cffaa973c5b0",
     "url": "/Old_CourseWork/static/js/runtime-main.e6d8e2e4.js"
+  },
+  {
+    "revision": "82c9ec759610eae3108550d953c72a06",
+    "url": "/Old_CourseWork/static/media/ClientsBack.82c9ec75.jpg"
+  },
+  {
+    "revision": "ace237cdbbbde75ee4213a5e0d65381b",
+    "url": "/Old_CourseWork/static/media/backimg.ace237cd.jpg"
   },
   {
     "revision": "123b7d37cd8d85017b593ad45c328a13",
@@ -34,6 +42,14 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "dcdcafe386e10f75ea9dad2e8c453e88",
     "url": "/Old_CourseWork/static/media/driver1.dcdcafe3.jpg"
+  },
+  {
+    "revision": "9eb052f364d2340f96b842933d8150dd",
+    "url": "/Old_CourseWork/static/media/driver2.9eb052f3.jpg"
+  },
+  {
+    "revision": "4c8f0000e24b322fc4800943fbcdce48",
+    "url": "/Old_CourseWork/static/media/driver3.4c8f0000.jpg"
   },
   {
     "revision": "4ab03d6e464af1e3d813175afd1a6974",
@@ -56,8 +72,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/Old_CourseWork/static/media/truck3.18e1eb9c.png"
   },
   {
-    "revision": "a25a53df73cf704e263a97d42b45e29f",
-    "url": "/Old_CourseWork/static/media/truck4.a25a53df.png"
+    "revision": "6a936f4cab67ddfeb3552ba4f9af8a5a",
+    "url": "/Old_CourseWork/static/media/truck4.6a936f4c.png"
   },
   {
     "revision": "433502d275ac2027885c3ab5c87fa975",
