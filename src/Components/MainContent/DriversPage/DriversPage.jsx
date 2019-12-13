@@ -19,8 +19,8 @@ class DriversPage extends React.Component{
 	componentDidMount(){
 		this.getDrivers();
 	}
-	getDrivers(){
-		fetch('http://localhost:4000/Drivers')
+	async getDrivers(){
+		await fetch('http://localhost:4000/Drivers')
 			.then(res => res.json())
 			.then(res =>this.setState({drivers: res.data}))
 			.catch(err=>console.log(err))

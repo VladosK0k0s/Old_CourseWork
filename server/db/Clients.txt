@@ -1,16 +1,20 @@
 DROP TABLE IF EXISTS `Clients`;
+DROP TRIGGER IF EXISTS Clients.date_clients_trigger;
 CREATE TABLE IF NOT EXISTS `Clients` (
     `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-    `login` int unsigned NOT NULL,
-    `password` int unsigned NOT NULL,
+    `login` varchar(30) UNIQUE COLLATE utf8_unicode_ci NOT NULL,
+    `password` varchar(60) COLLATE utf8_unicode_ci NOT NULL,
     `first_name` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
     `last_name` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
     `tel` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+    `email` varchar(30) UNIQUE COLLATE utf8_unicode_ci NOT NULL,
     `reg_date` date NOT NULL,
     PRIMARY KEY (id)
 )ENGINE=INNODB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;;
 CREATE TRIGGER `date_clients_trigger` 
-BEFORE INSERT ON `Driver_Truck`
+BEFORE INSERT ON `Clients`
 FOR EACH ROW
-    SET New.reg_date = CURDATE()
+    SET New.reg_date = CURDATE();
 
+INSERT INTO `Clients`(`login`, `password`, `first_name`, `last_name`, `tel`, `email`) 
+  VALUES('vlad', 'qwerty', 'Vlad', 'St', '228', 'rr@gmail.com');

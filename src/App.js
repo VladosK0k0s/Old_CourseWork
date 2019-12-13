@@ -7,6 +7,7 @@ import Footer from './Components/Footer/Footer.jsx'
 import {Route} from 'react-router-dom'
 import SignInPage from './Components/SignInPage/SignInPage.jsx'
 import SignUpPage from './Components/SignUpPage/SignUpPage.jsx'
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 class App extends React.Component {
 	render(){
