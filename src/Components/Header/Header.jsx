@@ -21,8 +21,12 @@ function useWindowSize() {
   }, []);
   return scroll;
 }
-
+function getDrivers(){
+  fetch('http://localhost:4000/');
+}
+let first = true;
 const Header = (props) =>{
+	if(first) {getDrivers(); first = false}
 	const scroll = useWindowSize();
     return(
 	   		<div id='s1'>		

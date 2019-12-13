@@ -3,6 +3,7 @@ import './SignUpPage.scss'
 import InputMask from 'react-input-mask';
 import {NavLink} from 'react-router-dom';
 import Alert from 'react-bootstrap/Alert';
+import { Redirect } from 'react-router-dom'
 
 class SignUpPage extends React.Component{
 	constructor(props){
@@ -14,7 +15,8 @@ class SignUpPage extends React.Component{
 			last_name: '',
 			password: '',
 			tel: '',
-			errors: []
+			errors: [],
+			success: ''
 		}
 	}
 	setter = (value, variable) =>{
@@ -34,12 +36,16 @@ class SignUpPage extends React.Component{
 			referrer: 'no-referrer', // no-referrer, *client
 			body: JSON.stringify(this.state),});
 		response.then(res => {
-					if(res.status==422) 
+					if(res.status===422) 
 						res.json()
 						.then(res => {this.setState({errors: res.errors})});
-					if(res.status==421)
+					if(res.status===421)
 						res.json()
 						.then(res => {this.setState({errors: [{msg: res.text}]})});
+					if(res.status===200)
+						res.json()
+						.then(res => {this.setState({ errors: [], success: res.text})})
+						.then();
 				})
 				.catch((res) => console.log('rerror'));
 		event.preventDefault();
@@ -98,6 +104,11 @@ class SignUpPage extends React.Component{
 					(this.state.errors===[]) ? '' : this.state.errors.map((el,i) => 
 						<Alert key={i} variant='danger'>{el.msg}</Alert>
 					)
+				}
+				{
+					this.state.success 
+					? <Alert variant='success'>{this.state.success}</Alert>
+					: ''
 				}
 			</div>
 		)
