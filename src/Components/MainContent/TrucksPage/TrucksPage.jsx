@@ -30,20 +30,12 @@ class TrucksPage extends React.Component{
 		return response.json()  
 	}
 	getTrucks = () => {
-		console.log('gettt');
 		fetch('http://localhost:4000/Trucks')
-			.then(this.status)  
-			.then(this.json)  
-			.then(data => {
-				this.setState({trucks: data.data})  
-				console.log('Request succeeded with JSON response');  
-			}).catch(function(error) {  
-				console.log('Request failed', error);  
-			});
+			.then(res => res.json())
+			.then(res =>this.setState({trucks: res.data}))
+			.catch(err=>console.log(err));
 	}
 	render(){
-		console.log(this.state.trucks);
-		console.log(Object.prototype.toString.call(this.state.trucks));
 		return(
 			<div className='TrucksPage'>
 				<h1>Our Trucks</h1>

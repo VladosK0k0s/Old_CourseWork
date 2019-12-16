@@ -1,76 +1,41 @@
-const {EnterData, options}      = require('./MysqlData.js');
 const express          = require('express');
-const bodyParser       = require('body-parser');
-const mysql            = require('mysql');
+const {EnterData}      = require('./MysqlData.js');
 const cors             = require('cors');
-const { check, validationResult } = require('express-validator');
+const mysql            = require('mysql');
 const bcrypt           = require('bcrypt');
+const morgan           = require('morgan')
+
+const { GenerateJWT, DecodeJWT, ValidateJWT } = require("./JWT.js");
+
+
+
 const saltRounds = 10;
-const session = require('express-session');
-const cookieParser = require('cookie-parser');
-const passport = require('passport');
-const MySQLStore = require('express-mysql-session')(session);
-const serve_static = require('serve-static');
-const sessionStore = new MySQLStore(options);
-const LocalStr = require('passport-local').Strategy;
+const port = process.env.PORT || 4000;
+const key = "$IloveJWT!";
+const header = {
+  alg: "HS512",
+  typ: "JWT"
+};
 
 // Initialize the app
 const app = express();
-
 app.use(cors());
-
-const SelectTrucks = 'SELECT * FROM Trucks';
-const SelectDrivers = 'SELECT * FROM Drivers';
-const SelectClients = (login, email) => `SELECT * FROM Clients where login='${login}' or email='${email}'`;
-const InsertClient = (data, hash) => `INSERT INTO Clients (login, password, first_name, last_name, tel, email) 
-                                VALUES('${data.login}', '${hash}', '${data.first_name}', '${data.last_name}', '${data.tel}', '${data.email}');`;
+app.use(express.json());
+app.use(morgan("dev"));
 
 
 const connection = mysql.createConnection(EnterData);
+const SelectClient = (emaillogin) => `SELECT * FROM Clients where login='${emaillogin}' or email='${emaillogin}'`;
+const InsertClient = (data) => `INSERT INTO Clients (login, password, first_name, tel, email) 
+                                VALUES('${data.login}', '${data.password}', '${data.first_name}', '${data.tel}', '${data.email}');`;
+const SelectTrucks = 'SELECT * FROM Trucks';
+const SelectDrivers = 'SELECT * FROM Drivers';
 
-
-app.use(express.json());
-app.use(bodyParser.json());
-app.use(cookieParser('foo'));
-app.use(serve_static(__dirname + '/../../public'));
-app.use(session({
-  secret: 'keyboard',
-  resave: true,
-  store: sessionStore,
-  saveUninitialized: true,
-}));
-app.use(passport.initialize());
-app.use(passport.session());
-
-passport.use(
-  new LocalStr({ usernameField: 'login'}, (login, password, done) =>{
-    connection.query(`SELECT * FROM Clients where login='${login}'`, function(error, results, fields){
-      let user = results[0];
-      if(!user) return done(null, false, {message: 'Email is registred'});
-      bcrypt.compare(password, user.password, (err, isMatch) =>{
-        if(err) throw err;
-        if(isMatch) {
-          return done(null, user);
-        }
-        else{
-          return done(null, false, {msg: 'incorrexct'});
-        }
-      });
-    })
-  })
-)
-
-connection.connect(err=>{
-  if(err){
-    console.log(err);
-  }
-   return err
-});
 
 app.get('/', (req, res) =>{
-  console.log(req.user_id, req.isAuthenticated());
-  res.json(req.user);
-})
+  console.log('Hi!');
+  //res.status(200).json({ user: req.user, auth: req.isAuthenticated()} );
+});
 
 
 app.get('/Trucks', (req, res) => {
@@ -78,71 +43,92 @@ app.get('/Trucks', (req, res) => {
     if(error){
       return res.send(error);
     }
-    return res.json({
+    return res.status(200).json({
       data: results
     })
   });
 });
+
+
 app.get('/Drivers', (req, res) => {
   connection.query(SelectDrivers, (error, results) => {
     if (error){
       res.send(error);
     }
     else{
-      return res.json({
+      return res.status(200).json({
         data: results
       })
     }
   });
 });
 
-app.post('/signUp', [
-  check('login', 'Login field cannot be empty.').exists(),
-  check('login', 'Login must be between 4-15 characters long.').isLength({ min: 4, max: 15 }),
-  check('email', 'The email field cannot be empty.').exists(),
-  check('email', 'Email address must be between 4-100 characters long, please try again.').isLength({ min: 4, max: 100 }),
-  check('password', 'Password must be between 8-100 characters long.').isLength({ min: 8, max: 100 }),
-  //check("password", "Password must include one lowercase character, one uppercase character, a number, and a special character.").matches(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.* )(?=.*[^a-zA-Z0-9]).{8,}$/, "i"),
-], (req, res) => {
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return res.status(422).json({ errors: errors.array() });
+
+app.post("/api/GenerateJWT", (req, res) =>{
+  let { header, claims, key } = req.body;
+  // In case, due to security reasons, if the client doesn't send a key,
+  // use our default key.
+  key = key || "$PraveenIsAwesome!";
+  res.json(GenerateJWT(header, claims, key))
+});
+
+
+app.post("/api/DecodeJWT", (req, res) => {
+  if(req.body.sJWS)
+    res.json(DecodeJWT(req.body.sJWS))
+  else{
+    res.json('');
   }
-  connection.query(SelectClients(req.body.login, req.body.email), function(error, results){
-    bcrypt.hash(req.body.password, saltRounds, function(err, hash) { 
-      connection.query(InsertClient(req.body, hash), function(error, results){
-        if(error){
-          return res.status(421).json({ text: 'User with this login or email already exists.' });
-        }
-        console.log('Successful add to DB');
-        return res.status(200).json({ text: 'Registration succecful!' });
+});
+
+
+app.post("/api/ValidateJWT", (req, res) =>{
+  let { header, token, key } = req.body;
+  // In case, due to security reasons, if the client doesn't send a key,
+  // use our default key.
+  key = key || "$PraveenIsAwesome!";
+  res.json(ValidateJWT(header, token, key));
+});
+
+
+app.post("/api/Users/SignIn", (req, res) => {
+  console.log(req.body);
+  connection.query(InsertClient(req.body), function(error, results){  
+    if(error){
+      return res.status(422).json({
+        Error: "User with this login or email already exists!"
       });
-    });
-  });  //{ login: '',  email: '',  first_name: '',  last_name: '',  password: '',  tel: '' };
-});
-// Start the server
-app.listen(4000, () => {
-  console.log('Running on 4000');
-});
-
-passport.serializeUser(function(user, done) {
-  console.log('Ses',user.id);
-  done(null, user.id);
-});
- 
-passport.deserializeUser(function(user, done) {
-  console.log('Des', user.id);
-  done(null, user.id);
+    }
+    else{
+      return res.status(200).json({
+        Message: "Successfully Signed In!"
+      });
+    }
+  }); 
 });
 
 
+app.post("/api/Users/Check", (req, res) => {
+  console.log(req.body);
+  connection.query(SelectClient(req.body.emaillogin), function(error, results){
+    if (results[0]) {
+      if (req.body.password === results[0].password) {
+        res.status(200).json(results[0]);  
+      }
+      else {
+        res.status(401).json({
+          Error: "Incorrect password or login/email!"
+        });  
+      }
+    }
+    else {
+      res.status(403).json({
+        Error: "User with this login or email doesn`t exists!"
+      });
+    }
+  });
+});
 
 
-// connection.query('SELECT Last_Insert_id() as user_id', function(error, results, fields){
-//   const user_id = results[0].user_id; 
-//   req.logIn(user_id, function(d){
-//     req.session.save(()=>{
-     
-//     });
-//   });
-// });
+
+app.listen(port, () =>  console.log(`Running on ${port}`));

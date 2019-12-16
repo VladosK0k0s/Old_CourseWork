@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {  faArrowUp, faHome, faCogs } from '@fortawesome/free-solid-svg-icons'
 import { Link } from "react-scroll";
 import {  CSSTransition,  TransitionGroup} from 'react-transition-group';
-
+import {SetJWTActionCreator} from '../../redux/SignUpPage_reducer';
 
 
 function useWindowSize() {
@@ -21,12 +21,17 @@ function useWindowSize() {
   }, []);
   return scroll;
 }
-function getDrivers(){
-  fetch('http://localhost:4000/');
-}
-let first = true;
+
+const SignOutUser = (e, store) => {
+	if (localStorage.getItem("JWT") !== null) {
+		localStorage.removeItem("JWT");
+	}
+	store.dispatch(SetJWTActionCreator(''));
+	e.preventDefault();
+};
+
 const Header = (props) =>{
-	if(first) {getDrivers(); first = false}
+	const jwt = props.store.getState().SignUpPage.jwt;
 	const scroll = useWindowSize();
     return(
 	   		<div id='s1'>		
@@ -70,12 +75,26 @@ const Header = (props) =>{
 							</div>
 						</NavLink>
 						<div className='sign'>
-							<NavLink className='bar' to = '/signIn'>
-								<div className='signin'>Sign In</div>
-							</NavLink>
-							<NavLink className='bar' to = '/signUp'>
-								<div>Sign Up</div>
-							</NavLink>
+							{
+								jwt
+								? ((jwt) =>{
+										if(!props.user.first_name){
+											props.setuser(jwt);
+										}
+										return <>
+														<p>Hi, {props.user.first_name}!</p>
+														<div className='bar' onClick={(event) => SignOutUser(event, props.store)}>Sign Out</div>
+													</>
+								})(jwt)
+								:	<>
+										<NavLink className='bar' to = '/signIn'>
+											<div className='signin'>Sign In</div>
+										</NavLink>
+										<NavLink className='bar' to = '/signUp'>
+											<div>Sign Up</div>
+										</NavLink>
+									</>
+							}
 						</div>
 					</div>
 				</div>

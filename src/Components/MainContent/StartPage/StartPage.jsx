@@ -2,9 +2,16 @@ import React from 'react';
 import './StartPage.scss'
 import ListItems from './ListItems/ListItems.jsx'
 import MainForm from './MainForm/MainForm.jsx'
+import Axios from "axios";
 
 
 class StartPage extends React.Component{
+	constructor(props){
+		super(props);
+		this.state = {
+			user: ''
+		}
+	}
 	render(){
 		return(
 			<div className='StartPage'>

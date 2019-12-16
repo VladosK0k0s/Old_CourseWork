@@ -1,5 +1,6 @@
 let initialState = {
-	link: `${process.env.PUBLIC_URL}/logo_icon.png`
+	link: `${process.env.PUBLIC_URL}/logo_icon.png`,
+	user: ''
 }
 
 const Header_reducer = (state = initialState, action) =>{

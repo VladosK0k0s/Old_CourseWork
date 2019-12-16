@@ -76,6 +76,10 @@
 .sign{
 	display: flex;
 	flex-direction: column;
+	>p{
+		margin: 0;
+		padding: 10px;
+	}
 }
 .signin{
 	border: 1px solid black;
@@ -86,7 +90,7 @@
 	border-radius: 50%;
 	margin-right: 10px;
 	margin-left: 10px;
-
+	cursor: pointer;
     transition: ease-out .3s;
     text-decoration: none;
     color: black;   

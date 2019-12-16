@@ -5,7 +5,6 @@ CREATE TABLE IF NOT EXISTS `Clients` (
     `login` varchar(30) UNIQUE COLLATE utf8_unicode_ci NOT NULL,
     `password` varchar(60) COLLATE utf8_unicode_ci NOT NULL,
     `first_name` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
-    `last_name` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
     `tel` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
     `email` varchar(30) UNIQUE COLLATE utf8_unicode_ci NOT NULL,
     `reg_date` date NOT NULL,
@@ -16,5 +15,5 @@ BEFORE INSERT ON `Clients`
 FOR EACH ROW
     SET New.reg_date = CURDATE();
 
-INSERT INTO `Clients`(`login`, `password`, `first_name`, `last_name`, `tel`, `email`) 
-  VALUES('vlad', 'qwerty', 'Vlad', 'St', '228', 'rr@gmail.com');
+INSERT INTO `Clients`(`login`, `password`, `first_name`, `tel`, `email`) 
+  VALUES('admin', 'qwerty', 'Vlad', '+380678046648', 'p.s.vlad2000@ukr.net');
