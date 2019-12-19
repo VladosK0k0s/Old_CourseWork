@@ -1,7 +1,9 @@
 DROP TABLE IF EXISTS `Trucks`;
+DROP TRIGGER IF EXISTS Clients.date_trigger;
 CREATE TABLE IF NOT EXISTS `Trucks` (
     `id` int unsigned NOT NULL AUTO_INCREMENT,
     `reg_number` int unsigned NOT NULL,
+    `name` varchar(60) COLLATE utf8_unicode_ci NOT NULL,
     `mileage` int unsigned NOT NULL,
     `reg_date` date NOT NULL,
     `cariage` int unsigned NOT NULL,
@@ -14,6 +16,20 @@ CREATE TRIGGER `date_trigger`
 BEFORE INSERT ON `Trucks`
 FOR EACH ROW
     SET New.reg_date = CURDATE()
+
+INSERT INTO `Trucks`(`name`, `reg_number`, `mileage`, `cariage`, `volume`, `price1km`, `minDistance`) 
+  VALUES('MAN TGL 12.250 LX NEU Euro6', 1212564, 100000, 5000, 55, 30, 400);
+
+INSERT INTO `Trucks`(`name`, `reg_number`, `mileage`, `cariage`, `volume`, `price1km`, `minDistance`) 
+  VALUES('MERCEDES BENZ Atego 815 970.01', 1516723, 200000, 7000, 55, 50, 500);
+
+INSERT INTO `Trucks`(`name`, `reg_number`, `mileage`, `cariage`, `volume`, `price1km`, `minDistance`) 
+  VALUES('MAN TGM 26-340 LL', 5476890, 500000, 15000, 120, 100, 500);
+  
+INSERT INTO `Trucks`(`name`, `reg_number`, `mileage`, `cariage`, `volume`, `price1km`, `minDistance`) 
+  VALUES('Mercedes Sprinter 316 Bluetech', 4728400, 300000, 1500, 17, 20, 50);
+
+
 
 Створення процедури вставки запису в таблицю
 
@@ -57,18 +73,6 @@ BEGIN
 DELETE FROM `Trucks` WHERE `id`=t_id;
 END //
 
-
-INSERT INTO `Trucks`(`reg_number`, `mileage`, `cariage`, `volume`, `price1km`, `minDistance`) 
-  VALUES(1212564, 100000, 5000, 55, 30, 400);
-
-INSERT INTO `Trucks`(`reg_number`, `mileage`, `cariage`, `volume`, `price1km`, `minDistance`) 
-  VALUES(1516723, 200000, 7000, 55, 50, 500);
-
-INSERT INTO `Trucks`(`reg_number`, `mileage`, `cariage`, `volume`, `price1km`, `minDistance`) 
-  VALUES(5476890, 500000, 15000, 120, 100, 500);
-  
-INSERT INTO `Trucks`(`reg_number`, `mileage`, `cariage`, `volume`, `price1km`, `minDistance`) 
-  VALUES(4728400, 300000, 1500, 17, 20, 50);
 
 
 	

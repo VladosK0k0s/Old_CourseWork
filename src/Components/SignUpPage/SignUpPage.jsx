@@ -32,7 +32,7 @@ class SignUpPage extends React.Component{
 		})
 		event.preventDefault();
 		const claims = this.state.user;
-		if (claims.login.trim().length < 3 || claims.password.trim().length < 3) {
+		if (claims.login.trim().length < 3 || claims.password.trim().length < 3 || claims.email.trim().length < 3) {
 			// If either of Username or Password is empty, set an error state.
 			this.setState({ Error: "You have to enter both username and password." });
 			// Stop proceeding.
@@ -53,6 +53,7 @@ class SignUpPage extends React.Component{
 						if (typeof Storage !== "undefined") {
 							localStorage.setItem("JWT", res.data);
 							this.props.store.dispatch(SetJWTActionCreator(res.data));
+							this.props.setuser(res.data);
 						}
 					});
 				});
@@ -71,18 +72,23 @@ class SignUpPage extends React.Component{
 					<form onSubmit={(event)=>this.handleSubmit(event)}>
 						<input 
 							placeholder='Login' 
+							required
+							minLength='1'
 							type="text" 
 							id="login" 
 							value={this.state.user.login}
 							onChange={(event)=>this.setter(event.target.value, 'login')}/>
 						<input 
 							placeholder='First Name' 
+							required
+							minLength='1'
 							type="text" 
 							id="first_name" 
 							value={this.state.user.first_name}
 							onChange={(event)=>this.setter(event.target.value, 'first_name')}/>
 						<input 
-							placeholder='Email' 
+							placeholder='Email'
+							required 
 							type="email" 
 							id="email"
 							value={this.state.user.email} 

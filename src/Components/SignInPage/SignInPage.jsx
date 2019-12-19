@@ -58,6 +58,7 @@ class SignInPage extends React.Component{
 						if (typeof Storage !== "undefined") {
 							localStorage.setItem("JWT", res.data);
 							this.props.store.dispatch(SetJWTActionCreator(res.data));
+							this.props.setuser(res.data);
 							this.setState({ Message: 'Success!' })
 						}
 					});
@@ -74,8 +75,8 @@ class SignInPage extends React.Component{
 					<p>Sign In to SS Logistics</p>
 					{!this.state.Message&&
 						<form onSubmit={(event)=>this.handleSubmit(event)}>
-							<input placeholder='Email or Login' type="text" id="emaillogin" onChange={(event)=>this.setter(event.target.value, 'emaillogin')}/>
-							<input placeholder='Password' type="password" id="password" onChange={(event)=>this.setter(event.target.value, 'password')}/>
+							<input value={this.state.emaillogin} placeholder='Email or Login' type="text" id="emaillogin" onChange={(event)=>this.setter(event.target.value, 'emaillogin')}/>
+							<input value={this.state.password} placeholder='Password' type="password" id="password" onChange={(event)=>this.setter(event.target.value, 'password')}/>
 							<input type="submit" value='Submit!'/>
 						</form>
 					}

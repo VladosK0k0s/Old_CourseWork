@@ -10,6 +10,7 @@ import ServicesPage from './ServicesPage/ServicesPage.jsx'
 import DriversPage from './DriversPage/DriversPage.jsx'
 import ClientsPage from './ClientsPage/ClientsPage.jsx'
 import RoadsPage from './RoadsPage/RoadsPage.jsx'
+import AdminPage from './AdminPage/AdminPage.jsx'
 
 
 const MainContent = (props) =>{
@@ -24,6 +25,14 @@ const MainContent = (props) =>{
             <Route path = '/content/Kilometers' render = {() => <RoadsPage data={props.store.getState().RoadsPage}/>}/>
             <Route path = '/content/Clients' render = {() => <ClientsPage />}/>
             <Route path = '/content/Drivers' render = {() => <DriversPage data={props.store.getState().DriversPage} />}/>
+            <Route 
+                path = '/content/AdminPage' 
+                render = {() => 
+                    props.user.login==='admin'
+                    ? <AdminPage/>
+                    : <p>404</p>
+                }
+            />
         </div>
 	);
 }

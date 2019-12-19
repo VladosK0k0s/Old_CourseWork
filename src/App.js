@@ -2,12 +2,12 @@ import React from 'react';
 import './App.css';
 import Header from './Components/Header/Header.jsx'
 import MainContent from './Components/MainContent/MainContent.jsx'
-import {BrowserRouter} from 'react-router-dom'
 import Footer from './Components/Footer/Footer.jsx'
-import {Route} from 'react-router-dom'
 import SignInPage from './Components/SignInPage/SignInPage.jsx'
 import SignUpPage from './Components/SignUpPage/SignUpPage.jsx'
 import 'bootstrap/dist/css/bootstrap.min.css';
+import {BrowserRouter} from 'react-router-dom'
+import {Route} from 'react-router-dom'
 import { DecodeJWT } from './services.js';
 
 class App extends React.Component {
@@ -26,29 +26,30 @@ class App extends React.Component {
 			DecodeJWT(token, data => 
 				this.setState({ user: data.data })
 			);
+		else this.setState({ user: {} })
 	}
 	render(){
 	  return (
 	    <BrowserRouter>
 		    <div className='App-wrapper'>
-		    	<Route path = '/signIn' render = {() => <SignInPage history={this.props.history}  store = {this.props.store}/>}/>
-					<Route path = '/signUp' render = {() => <SignUpPage store = {this.props.store}/>}/>
+		    	<Route path = '/signIn' render = {() => <SignInPage setuser = {this.setUsername} store = {this.props.store}/>}/>
+				<Route path = '/signUp' render = {() => <SignUpPage setuser = {this.setUsername} store = {this.props.store}/>}/>
 		    	<Route exact path = '/' render = {() => (
 		    						<div>
 			    						<Header setuser = {this.setUsername} user={this.state.user} store = {this.props.store}/>
-								        <MainContent store = {this.props.store}/>
+								        <MainContent user={this.state.user} store = {this.props.store}/>
 								      	<Footer/>
 							      	</div>)}/>
 		    	<Route exact path = '/Old_CourseWork/' render = {() => (
 		    						<div>
 			    						<Header setuser = {this.setUsername} user={this.state.user} store = {this.props.store}/>
-								        <MainContent store = {this.props.store}/>
+								        <MainContent user={this.state.user} store = {this.props.store}/>
 								      	<Footer/>
 							      	</div>)}/>
 		    	<Route path = '/content' render = {() => (
 		    						<div>
 										<Header setuser = {this.setUsername} user={this.state.user} store = {this.props.store}/>
-										<MainContent store = {this.props.store}/>
+										<MainContent user={this.state.user} store = {this.props.store}/>
 										<Footer/>
 									</div>)}/>
 							        

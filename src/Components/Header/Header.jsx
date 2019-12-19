@@ -3,7 +3,7 @@ import './Header.scss'
 import {NavLink} from 'react-router-dom'
 import 'react-sticky-header/styles.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {  faArrowUp, faHome, faCogs } from '@fortawesome/free-solid-svg-icons'
+import {  faArrowUp, faHome, faCogs, faUserCog } from '@fortawesome/free-solid-svg-icons'
 import { Link } from "react-scroll";
 import {  CSSTransition,  TransitionGroup} from 'react-transition-group';
 import {SetJWTActionCreator} from '../../redux/SignUpPage_reducer';
@@ -22,12 +22,13 @@ function useWindowSize() {
   return scroll;
 }
 
-const SignOutUser = (e, store) => {
+const SignOutUser = (e, store, cb) => {
 	if (localStorage.getItem("JWT") !== null) {
 		localStorage.removeItem("JWT");
 	}
 	store.dispatch(SetJWTActionCreator(''));
 	e.preventDefault();
+	cb(null);
 };
 
 const Header = (props) =>{
@@ -73,29 +74,34 @@ const Header = (props) =>{
 								<FontAwesomeIcon icon={faCogs} size='2x'/> 
 								<span>Services</span>
 							</div>
-						</NavLink>
-						<div className='sign'>
+						</NavLink>			
 							{
 								jwt
-								? ((jwt) =>{
-										if(!props.user.first_name){
-											props.setuser(jwt);
+								? <>
+										{
+											props.user.login === 'admin'
+											? <NavLink className='bar' to = '/content/AdminPage'>
+													<div>
+														<FontAwesomeIcon icon={faUserCog} size='2x'/> 
+														<span>AdminPage</span>
+													</div>
+												</NavLink>
+											: <></>
 										}
-										return <>
-														<p>Hi, {props.user.first_name}!</p>
-														<div className='bar' onClick={(event) => SignOutUser(event, props.store)}>Sign Out</div>
-													</>
-								})(jwt)
-								:	<>
+										<div className='sign'>
+											<p>Hi, {props.user.first_name}!</p>
+											<div className='bar' onClick={(event) => SignOutUser(event, props.store, props.setuser)}>Sign Out</div>
+										</div>
+									</>
+								:	<div className='sign'>
 										<NavLink className='bar' to = '/signIn'>
 											<div className='signin'>Sign In</div>
 										</NavLink>
 										<NavLink className='bar' to = '/signUp'>
 											<div>Sign Up</div>
 										</NavLink>
-									</>
+									</div>
 							}
-						</div>
 					</div>
 				</div>
 				{

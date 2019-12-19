@@ -1,21 +1,35 @@
 const express          = require('express');
 const {EnterData}      = require('./MysqlData.js');
 const cors             = require('cors');
+const path             = require("path");
 const mysql            = require('mysql');
+const morgan           = require('morgan');
 const bcrypt           = require('bcrypt');
-const morgan           = require('morgan')
+const multer           = require("multer");
+const uuidv4           = require('uuid/v4');
 
 const { GenerateJWT, DecodeJWT, ValidateJWT } = require("./JWT.js");
+const { saltRounds } = require('./bcryptSalt.js');
 
 
 
-const saltRounds = 10;
 const port = process.env.PORT || 4000;
 const key = "$IloveJWT!";
 const header = {
   alg: "HS512",
   typ: "JWT"
 };
+
+
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, './server/images/')
+  },
+  filename: function (req, file, cb) {
+    cb(null, `${Date.now()}.png`)
+  }
+})
+var upload = multer({ storage: storage }).single('file');
 
 // Initialize the app
 const app = express();
@@ -26,8 +40,8 @@ app.use(morgan("dev"));
 
 const connection = mysql.createConnection(EnterData);
 const SelectClient = (emaillogin) => `SELECT * FROM Clients where login='${emaillogin}' or email='${emaillogin}'`;
-const InsertClient = (data) => `INSERT INTO Clients (login, password, first_name, tel, email) 
-                                VALUES('${data.login}', '${data.password}', '${data.first_name}', '${data.tel}', '${data.email}');`;
+const InsertClient = (data, hash) => `INSERT INTO Clients (login, password, first_name, tel, email) 
+                                VALUES('${data.login}', '${hash}', '${data.first_name}', '${data.tel}', '${data.email}');`;
 const SelectTrucks = 'SELECT * FROM Trucks';
 const SelectDrivers = 'SELECT * FROM Drivers';
 
@@ -36,6 +50,20 @@ app.get('/', (req, res) =>{
   console.log('Hi!');
   //res.status(200).json({ user: req.user, auth: req.isAuthenticated()} );
 });
+
+
+app.post("/api/photos/add", function(req, res) {  
+  upload(req, res, function (err) {
+    //console.log('hjgjhfjf', req.file);
+      if (err instanceof multer.MulterError) {
+        return res.status(500).json(err)
+      } else if (err) {
+        return res.status(500).json(err)
+      }
+    return res.status(200).sendFile(__dirname + '/images/' + req.file.filename);
+  })
+});
+
 
 
 app.get('/Trucks', (req, res) => {
@@ -49,6 +77,10 @@ app.get('/Trucks', (req, res) => {
   });
 });
 
+
+app.get('/TrucksImages', (req, res) => {
+  
+})
 
 app.get('/Drivers', (req, res) => {
   connection.query(SelectDrivers, (error, results) => {
@@ -93,18 +125,20 @@ app.post("/api/ValidateJWT", (req, res) =>{
 
 app.post("/api/Users/SignIn", (req, res) => {
   console.log(req.body);
-  connection.query(InsertClient(req.body), function(error, results){  
-    if(error){
-      return res.status(422).json({
-        Error: "User with this login or email already exists!"
-      });
-    }
-    else{
-      return res.status(200).json({
-        Message: "Successfully Signed In!"
-      });
-    }
-  }); 
+  bcrypt.hash(req.body.password, saltRounds, function(err, hash) {
+    connection.query(InsertClient(req.body, hash), function(error, results){  
+      if(error){
+        return res.status(422).json({
+          Error: "User with this login or email already exists!"
+        });
+      }
+      else{
+        return res.status(200).json({
+          Message: "Successfully Signed In!"
+        });
+      }
+    }); 
+  });
 });
 
 
@@ -112,14 +146,14 @@ app.post("/api/Users/Check", (req, res) => {
   console.log(req.body);
   connection.query(SelectClient(req.body.emaillogin), function(error, results){
     if (results[0]) {
-      if (req.body.password === results[0].password) {
-        res.status(200).json(results[0]);  
-      }
-      else {
-        res.status(401).json({
-          Error: "Incorrect password or login/email!"
-        });  
-      }
+      bcrypt.compare(req.body.password , results[0].password, function(err, result) {
+        if(result) res.status(200).json(results[0]);  
+        else {
+          res.status(401).json({
+            Error: "Incorrect password or login/email!"
+          });  
+        }
+      });
     }
     else {
       res.status(403).json({
