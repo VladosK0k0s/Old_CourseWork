@@ -8,4 +8,57 @@
             }
         }
     }
+    .truckinfo{
+        margin: 2% 0 2% 0;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        >div{
+            width: 45%;
+        }
+        img{
+            margin-right: calc(20% - 10vw);
+
+            width: calc(10% + 20vw);
+            height: calc(10% + 20vw);
+        }
+    }
+}
+.AddTruck{
+    margin-right: 10%;
+    padding: 20px;
+    border: 5px solid aqua;
+    border-radius: 10px;
+    >.mainform{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        >form{
+            width: 45%;
+        }
+        >.photoSection{
+            width: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            >img{
+                margin: 10%;
+            }
+        }
+    }
+    >button{
+        display: block;
+        padding: 10px;
+        border-radius: 4px;
+        margin: auto;
+        margin-top: 2%;
+    }
+    label{
+		color: #3e3c63;
+		font-size: 1em;
+        font-family: "Delivery", Verdana,sans-serif;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;    
+	}
 }

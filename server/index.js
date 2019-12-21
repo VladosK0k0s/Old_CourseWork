@@ -26,6 +26,7 @@ var storage = multer.diskStorage({
     cb(null, './server/images/')
   },
   filename: function (req, file, cb) {
+    console.log(file);
     cb(null, `${Date.now()}.png`)
   }
 })
@@ -44,6 +45,10 @@ const InsertClient = (data, hash) => `INSERT INTO Clients (login, password, firs
                                 VALUES('${data.login}', '${hash}', '${data.first_name}', '${data.tel}', '${data.email}');`;
 const SelectTrucks = 'SELECT * FROM Trucks';
 const SelectDrivers = 'SELECT * FROM Drivers';
+const InsertTruck = (data) => `INSERT INTO Trucks (name, reg_number, mileage, cariage, volume, price1km, minDistance, photoname)
+                                VALUES('${data.name}', ${+data.reg_number}, ${+data.mileage}, ${+data.cariage}, ${+data.volume}, 
+                                ${+data.price1km}, ${+data.minDistance}, '${data.imagename}'); `;
+const DeleteTruck = (id) => `DELETE FROM Trucks WHERE id = ${+id};`
 
 
 app.get('/', (req, res) =>{
@@ -51,19 +56,55 @@ app.get('/', (req, res) =>{
   //res.status(200).json({ user: req.user, auth: req.isAuthenticated()} );
 });
 
-
-app.post("/api/photos/add", function(req, res) {  
+app.post("/api/photos/add", function(req, res) {
   upload(req, res, function (err) {
-    //console.log('hjgjhfjf', req.file);
       if (err instanceof multer.MulterError) {
         return res.status(500).json(err)
       } else if (err) {
         return res.status(500).json(err)
       }
-    return res.status(200).sendFile(__dirname + '/images/' + req.file.filename);
+      return res.status(200).send(req.file.filename)
   })
 });
 
+app.post("/api/photos/get", (req, res) => {
+  return res.status(200).sendFile(__dirname + '/images/' + req.body.name);
+});
+
+app.post("/api/trucks/add", (req, res) => {
+  if(!req.body.imagename) 
+    return res.status(405).json({
+      Error: "Image is necessary!"
+    });
+  connection.query(InsertTruck(req.body), function(error, results){  
+    if(error){
+      return res.status(422).json({
+        Error: "Error"
+      });
+    }
+    else{
+      return res.status(200).json({
+        Message: "Success"
+      });
+    }
+  }); 
+});
+
+app.post('/api/trucks/del', (req, res) => {
+  console.log(req);
+  connection.query(DeleteTruck(req.body.id), function(error, results){  
+    if(error){
+      return res.status(422).json({
+        Error: "Error"
+      });
+    }
+    else{
+      return res.status(200).json({
+        Message: "Success"
+      });
+    }
+  }); 
+});
 
 
 app.get('/Trucks', (req, res) => {
@@ -77,10 +118,6 @@ app.get('/Trucks', (req, res) => {
   });
 });
 
-
-app.get('/TrucksImages', (req, res) => {
-  
-})
 
 app.get('/Drivers', (req, res) => {
   connection.query(SelectDrivers, (error, results) => {

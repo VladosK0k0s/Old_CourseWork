@@ -1,5 +1,5 @@
 DROP TABLE IF EXISTS `Trucks`;
-DROP TRIGGER IF EXISTS Clients.date_trigger;
+DROP TRIGGER IF EXISTS Trucks.date_trigger;
 CREATE TABLE IF NOT EXISTS `Trucks` (
     `id` int unsigned NOT NULL AUTO_INCREMENT,
     `reg_number` int unsigned NOT NULL,
@@ -10,24 +10,25 @@ CREATE TABLE IF NOT EXISTS `Trucks` (
     `volume` int unsigned NOT NULL,
     `price1km` int unsigned NOT NULL,
     `minDistance` int unsigned NOT NULL,
+    `photoname` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
     PRIMARY KEY (id)
-)ENGINE=INNODB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;;
+)ENGINE=INNODB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 CREATE TRIGGER `date_trigger` 
 BEFORE INSERT ON `Trucks`
 FOR EACH ROW
-    SET New.reg_date = CURDATE()
+    SET New.reg_date = CURDATE();
 
-INSERT INTO `Trucks`(`name`, `reg_number`, `mileage`, `cariage`, `volume`, `price1km`, `minDistance`) 
-  VALUES('MAN TGL 12.250 LX NEU Euro6', 1212564, 100000, 5000, 55, 30, 400);
+INSERT INTO `Trucks`(`name`, `reg_number`, `mileage`, `cariage`, `volume`, `price1km`, `minDistance`, `photoname`) 
+  VALUES('MAN TGL 12.250 LX NEU Euro6', 1212564, 100000, 5000, 55, 30, 400, '1576879946855.png');
 
-INSERT INTO `Trucks`(`name`, `reg_number`, `mileage`, `cariage`, `volume`, `price1km`, `minDistance`) 
-  VALUES('MERCEDES BENZ Atego 815 970.01', 1516723, 200000, 7000, 55, 50, 500);
+INSERT INTO `Trucks`(`name`, `reg_number`, `mileage`, `cariage`, `volume`, `price1km`, `minDistance`, `photoname`) 
+  VALUES('MERCEDES BENZ Atego 815 970.01', 1516723, 200000, 7000, 55, 50, 500, '1576879998785.png');
 
-INSERT INTO `Trucks`(`name`, `reg_number`, `mileage`, `cariage`, `volume`, `price1km`, `minDistance`) 
-  VALUES('MAN TGM 26-340 LL', 5476890, 500000, 15000, 120, 100, 500);
+INSERT INTO `Trucks`(`name`, `reg_number`, `mileage`, `cariage`, `volume`, `price1km`, `minDistance`, `photoname`) 
+  VALUES('MAN TGM 26-340 LL', 5476890, 500000, 15000, 120, 100, 500, '1576880005391.png');
   
-INSERT INTO `Trucks`(`name`, `reg_number`, `mileage`, `cariage`, `volume`, `price1km`, `minDistance`) 
-  VALUES('Mercedes Sprinter 316 Bluetech', 4728400, 300000, 1500, 17, 20, 50);
+INSERT INTO `Trucks`(`name`, `reg_number`, `mileage`, `cariage`, `volume`, `price1km`, `minDistance`, `photoname`) 
+  VALUES('Mercedes Sprinter 316 Bluetech', 4728400, 300000, 1500, 17, 20, 50, '1576880012769.png');
 
 
 

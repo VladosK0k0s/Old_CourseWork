@@ -53,6 +53,28 @@ export const GenUser = (user, cb) => {
     });
 };
 
+export const GenTruck = (truck, cb) => {
+  axios
+    .post("/api/trucks/add", truck)
+    .then(function(res) {
+      cb(res);
+    })
+    .catch(function(err) {
+      cb(err.response, true);
+    });
+};
+export const DelTruck = (id, cb) => {
+  axios
+    .post("/api/trucks/del",{id: id})
+    .then(function(res) {
+      cb(res);
+    })
+    .catch(function(err) {
+      cb(err.response, true);
+    });
+};
+
+
 export const CheckInput = (data, cb) =>{
   axios
     .post("/api/Users/Check", data)

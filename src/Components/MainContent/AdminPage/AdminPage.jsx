@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
 import './AdminPage.scss';
 import axios from 'axios';
-
-
+import Alert from 'react-bootstrap/Alert';
+import Button from 'react-bootstrap/Button';
+import { GenTruck, DelTruck } from '../../../services.js';
 
 
 
@@ -13,37 +14,68 @@ class AdminPage extends Component {
 			drivers: [],
 			trucks: [],
 			file: '',
-			image: ''
+			imagelink: '',
+			truckinput: {
+				reg_number: '',
+				name: '',
+				mileage: '',
+				cariage: '',
+				volume: '',
+				price1km: '',
+				minDistance: '',
+				imagename: '',
+				trucklink: ''
+			},
+			Error: '',
+			Message: ''
 		}
 	}
 	setFile = (e) =>{
-		console.log(e.target.files[0])
-		this.setState({file: e.target.files[0]});
+		let newfile = e.target.files[0];
+		if(!newfile) return;
+		newfile.newname = Date.now();
+		this.setState({file: newfile}, console.log(this.state.file));
 	}
 	sendFile = async (e) =>{
+		if(!this.state.file) return this.setState({Error: 'Select an Image!'})
 		e.preventDefault();
 		const formData = new FormData();
-        formData.append('file',this.state.file);
-        const config = {
-            headers: {
-                'content-type': 'multipart/form-data'
-			},
+		formData.append('file',this.state.file);
+        const config1 = {
 			responseType: "blob"			
 		};
-		await axios.post("/api/photos/add", formData, config)
+		const config2 = {
+            headers: {
+                'content-type': 'multipart/form-data'
+			},			
+		};
+		await axios.post("/api/photos/add", formData, config2)
 			.then(res => {
+				let newObj = this.state.truckinput;
+				newObj.imagename = res.data
+				this.setState({
+					truckinput: newObj
+				});
+			});
+		await axios.post("/api/photos/get", {name: this.state.truckinput.imagename}, config1)
+			.then(res => {
+				console.log(res);
 				const file = new Blob([res.data], {type: "image/png"});
 				const fileURL = URL.createObjectURL(file);
 				this.setState({
-					image: fileURL
+					imagelink: fileURL
 				});
-				//window.open(fileURL);
 				console.log(fileURL)
-			})
-		}
+		});
+	}
 	componentDidMount = () =>{
 		this.getDrivers(); //id, tel, card_number, first_name, last_name, age, reg_date
-		this.getTrucks();  //id, reg_number, name, mileage, reg_date, cariage, volume, price1km, minDistance
+		this.getTrucks();  //id, reg_number, name, mileage, reg_date, cariage, volume, price1km, minDistance, photoname
+	}
+	getTrucksImgLinks = () =>{
+		this.state.trucks.forEach(element => {
+			this.getTruckImageLink(element.id)
+		});
 	}
 	getDrivers = () =>{
 		fetch('http://localhost:4000/Drivers')
@@ -51,11 +83,74 @@ class AdminPage extends Component {
 			.then(res =>this.setState({drivers: res.data}))
 			.catch(err=>console.log(err))
 	}
+	getTruckImageLink = (id) =>{
+		const index = this.state.trucks.findIndex((el)=>el.id===id);
+		const config = {
+			responseType: "blob"			
+		};
+		axios.post("/api/photos/get", {name: this.state.trucks[index].photoname}, config)
+			.then(res => {
+				const file = new Blob([res.data], {type: "image/png"});
+				const fileURL = URL.createObjectURL(file);
+				const newArr = this.state.trucks;
+				newArr[index].trucklink = fileURL;
+				this.setState({
+					trucks: newArr
+				})
+		});
+	}
 	getTrucks = () => {
 		fetch('http://localhost:4000/Trucks')
 			.then(res => res.json())
 			.then(res =>this.setState({trucks: res.data}))
+			.then(() => this.getTrucksImgLinks())
 			.catch(err=>console.log(err));
+	}
+	handleTruckChange = (e) =>{
+		const input = e.target;
+		const newObj = this.state.truckinput;
+		newObj[`${input.name}`] = input.value;
+		this.setState({ truckinput: newObj });
+	}
+	handleTruckAdd = () =>{
+		this.setState({
+			Error: '',
+			Message: ''
+		})
+		GenTruck(this.state.truckinput, res => {		
+			if(res.status === 405){
+				this.setState({ Error: res.data.Error });
+			}	
+			if(res.status === 200){
+				this.setState({ Message: res.data.Message, 
+					file: '',
+					imagelink: '',
+					truckinput: {
+						reg_number: '',
+						name: '',
+						mileage: '',
+						cariage: '',
+						volume: '',
+						price1km: '',
+						minDistance: '',
+						imagename: '',
+						trucklink: ''
+					},
+				}, this.getTrucks);
+			}
+		});
+	}
+	handleTruckDelete = (id) =>{
+		console.log(id);
+		DelTruck(id, res =>{
+			if(res.status === 405){
+				console.log(res.data.Error);
+			}	
+			if(res.status === 200){
+				console.log(res.data.Message);
+				this.getTrucks();
+			}
+		});
 	}
 	render(){
 		return (
@@ -66,33 +161,89 @@ class AdminPage extends Component {
 					{
 						(Object.prototype.toString.call(this.state.trucks) !== "[object Array]"	) ? '' : this.state.trucks.map(el=>{
 							return(
-								<div key={el.id}>
-									<h4>Name: {el.name}</h4>
-									<p>Carriage Capacity: {el.cariage} <i>kg</i></p>
-									<p>Volume: Up To {el.volume} <i>m{`\u00B3`}</i></p>
-									<p>Price for 1km: {el.price1km} <i>UAH</i></p>
-									<p>Minimum distance: {el.minDistance} <i>km</i></p>
-									<p>Registration date: {el.reg_date.substr(0, 10)}</p>
-									<p>Registration number: {el.reg_number}</p>
-									<form onSubmit={this.sendFile}>
-										<input type="file" onChange={this.setFile} name="file"/>
-										<button type='submit'> Send </button>
-									</form>
+								<div className='truckinfo' key={el.id}>
+									<div>
+										<h4>Name: {el.name}</h4>
+										<p>Carriage Capacity: {el.cariage} <i>kg</i></p>
+										<p>Volume: Up To {el.volume} <i>m{`\u00B3`}</i></p>
+										<p>Price for 1km: {el.price1km} <i>UAH</i></p>
+										<p>Mileage: {el.mileage} <i>km</i></p>
+										<p>Minimum distance: {el.minDistance} <i>km</i></p>
+										<p>Registration date: {el.reg_date.substr(0, 10)}</p>
+										<p>Registration number: {el.reg_number}</p>
+										<Button onClick={()=>this.handleTruckDelete(el.id)} variant="outline-danger">Delete</Button>
+									</div>
 									{
-										this.state.image
-										? <img style={{width: '500px'}} src={this.state.image} alt=""/>
+										el.trucklink
+										? <img src={el.trucklink} alt=""/>
 										: ''
 									}
-									
 								</div>
 							)
 						})
 					}
+					<div className='AddTruck'>
+						<h4>Add new Truck</h4>
+						<div className='mainform'>
+							<form>
+								<label>
+									Registration number:
+									<input name='reg_number' type="text" onChange={this.handleTruckChange} value={this.state.truckinput.reg_number}/>
+								</label>
+								<label>
+									Name:
+									<input name='name' type="text" onChange={this.handleTruckChange} value={this.state.truckinput.name}/>
+								</label>
+								<label>
+									Mileage:
+									<input name='mileage' type="text" onChange={this.handleTruckChange} value={this.state.truckinput.mileage}/>
+								</label>
+								<label>
+									Carriage Capacity:
+									<input name='cariage' type="text" onChange={this.handleTruckChange} value={this.state.truckinput.cariage}/>
+								</label>
+								<label>
+									Volume:
+									<input name='volume' type="text" onChange={this.handleTruckChange} value={this.state.truckinput.volume}/>
+								</label>
+								<label>
+									Price for 1km:
+									<input name='price1km' type="text" onChange={this.handleTruckChange} value={this.state.truckinput.price1km}/>
+								</label>
+								<label>
+									Minimum distance:
+									<input name='minDistance' type="text" onChange={this.handleTruckChange} value={this.state.truckinput.minDistance}/>
+								</label>
+							</form>
+							<div className='photoSection'>
+								<div>
+									<input accept='image/png' type="file" onChange={this.setFile} name="file"/>
+									<button onClick={this.sendFile}> Add Photo </button>
+								</div>
+								{
+									this.state.imagelink
+									? <img style={{width: '80%'}} src={this.state.imagelink} alt=""/>
+									: ''
+								}	
+							</div>
+						</div>
+						{this.state.Error &&
+							<Alert style={{margin: '20px', textAlign: 'center'}} variant='danger'>
+								{this.state.Error}
+							</Alert>
+						}
+						{this.state.Message &&
+								<Alert style={{margin: '20px', textAlign: 'center'}} variant='success'>
+									{this.state.Message}
+								</Alert>
+						}
+						<button onClick={this.handleTruckAdd}> Send Data </button>
+					</div>	
 				</div>
 				<div>
 					<h3>Drivers Section</h3>
 					{
-						(Object.prototype.toString.call(this.state.drivers) !== "[object Array]"	) ? '' : this.state.drivers.map(el=>{
+						(Object.prototype.toString.call(this.state.drivers) !== "[object Array]") ? '' : this.state.drivers.map(el=>{
 							return(
 								<div key={el.id}>
 									<h4>Name: {el.first_name} {el.last_name}</h4>

@@ -6,7 +6,11 @@ class TruckItem extends React.Component{
 	render(){
 		return(
 			<div className='truckBlock'>
-				<img src={this.props.imglink} alt={`truck`}/>
+				{
+					this.props.data.trucklink
+					? <img src={this.props.data.trucklink} alt=""/>
+					: ''
+				}
 				<div className='truckinfo'>
 					<div>
 						<h3>Carriage Capacity: {this.props.data.cariage} <i>kg</i></h3>
