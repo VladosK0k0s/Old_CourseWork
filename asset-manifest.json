@@ -1,18 +1,19 @@
 {
   "files": {
-    "main.css": "/Old_CourseWork/static/css/main.86d44a3c.chunk.css",
-    "main.js": "/Old_CourseWork/static/js/main.060d10ca.chunk.js",
-    "main.js.map": "/Old_CourseWork/static/js/main.060d10ca.chunk.js.map",
-    "runtime-main.js": "/Old_CourseWork/static/js/runtime-main.e6d8e2e4.js",
-    "runtime-main.js.map": "/Old_CourseWork/static/js/runtime-main.e6d8e2e4.js.map",
-    "static/css/2.9765426d.chunk.css": "/Old_CourseWork/static/css/2.9765426d.chunk.css",
-    "static/js/2.eb41500e.chunk.js": "/Old_CourseWork/static/js/2.eb41500e.chunk.js",
-    "static/js/2.eb41500e.chunk.js.map": "/Old_CourseWork/static/js/2.eb41500e.chunk.js.map",
+    "main.css": "/Old_CourseWork/static/css/main.9ef29e15.chunk.css",
+    "main.js": "/Old_CourseWork/static/js/main.4a1ebb09.chunk.js",
+    "main.js.map": "/Old_CourseWork/static/js/main.4a1ebb09.chunk.js.map",
+    "runtime-main.js": "/Old_CourseWork/static/js/runtime-main.17212bd4.js",
+    "runtime-main.js.map": "/Old_CourseWork/static/js/runtime-main.17212bd4.js.map",
+    "static/css/2.c47e5b45.chunk.css": "/Old_CourseWork/static/css/2.c47e5b45.chunk.css",
+    "static/js/2.5631f63d.chunk.js": "/Old_CourseWork/static/js/2.5631f63d.chunk.js",
+    "static/js/2.5631f63d.chunk.js.map": "/Old_CourseWork/static/js/2.5631f63d.chunk.js.map",
     "index.html": "/Old_CourseWork/index.html",
-    "precache-manifest.5f5bffc18f6e237a913f74568610a617.js": "/Old_CourseWork/precache-manifest.5f5bffc18f6e237a913f74568610a617.js",
+    "precache-manifest.c0562f76795d99596773cae09ee2248a.js": "/Old_CourseWork/precache-manifest.c0562f76795d99596773cae09ee2248a.js",
     "service-worker.js": "/Old_CourseWork/service-worker.js",
-    "static/css/2.9765426d.chunk.css.map": "/Old_CourseWork/static/css/2.9765426d.chunk.css.map",
-    "static/css/main.86d44a3c.chunk.css.map": "/Old_CourseWork/static/css/main.86d44a3c.chunk.css.map",
+    "static/css/2.c47e5b45.chunk.css.map": "/Old_CourseWork/static/css/2.c47e5b45.chunk.css.map",
+    "static/css/main.9ef29e15.chunk.css.map": "/Old_CourseWork/static/css/main.9ef29e15.chunk.css.map",
+    "static/js/2.5631f63d.chunk.js.LICENSE": "/Old_CourseWork/static/js/2.5631f63d.chunk.js.LICENSE",
     "static/media/ClientsPage.scss": "/Old_CourseWork/static/media/ClientsBack.82c9ec75.jpg",
     "static/media/RoadsPage.scss": "/Old_CourseWork/static/media/backimg.ace237cd.jpg",
     "static/media/close.svg": "/Old_CourseWork/static/media/close.123b7d37.svg",
@@ -27,5 +28,12 @@
     "static/media/truck3.png": "/Old_CourseWork/static/media/truck3.18e1eb9c.png",
     "static/media/truck4.png": "/Old_CourseWork/static/media/truck4.6a936f4c.png",
     "static/media/ukrDelivery.jpg": "/Old_CourseWork/static/media/ukrDelivery.433502d2.jpg"
-  }
+  },
+  "entrypoints": [
+    "static/js/runtime-main.17212bd4.js",
+    "static/css/2.c47e5b45.chunk.css",
+    "static/js/2.5631f63d.chunk.js",
+    "static/css/main.9ef29e15.chunk.css",
+    "static/js/main.4a1ebb09.chunk.js"
+  ]
 }
