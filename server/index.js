@@ -72,6 +72,7 @@ app.post("/api/photos/get", (req, res) => {
 });
 
 app.post("/api/trucks/add", (req, res) => {
+  console.log(InsertTruck(req.body));
   if(!req.body.imagename) 
     return res.status(405).json({
       Error: "Image is necessary!"

@@ -1,6 +1,23 @@
-
 button{
-	border-radius: 10%;
+	margin-top: 20px;
+	cursor: pointer;
+	outline: none;
+	font-family: 'Formular-Regular';
+	font-weight: 900;
+	font-size: 14px;
+	border: 2px solid #10c8d2;
+	border-radius: 4px;
+	padding: 3px 5px;
+	color: #10c8d2;
+	background-color: #fff;
+	transition: .225s;
+}
+button:hover{
+	color:  #fff;
+	background-color: #10c8d2;
+}
+h1{
+	text-align: center;
 }
 .App-wrapper{
 	font-family: 'Formular-Regular';

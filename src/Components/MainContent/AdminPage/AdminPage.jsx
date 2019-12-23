@@ -188,7 +188,7 @@ class AdminPage extends Component {
 							<form>
 								<label>
 									Registration number:
-									<input name='reg_number' type="text" onChange={this.handleTruckChange} value={this.state.truckinput.reg_number}/>
+									<input name='reg_number' type="text" maxLength='10' onChange={this.handleTruckChange} value={this.state.truckinput.reg_number}/>
 								</label>
 								<label>
 									Name:
@@ -196,23 +196,23 @@ class AdminPage extends Component {
 								</label>
 								<label>
 									Mileage:
-									<input name='mileage' type="text" onChange={this.handleTruckChange} value={this.state.truckinput.mileage}/>
+									<input name='mileage' maxLength='10' type="text" onChange={this.handleTruckChange} value={this.state.truckinput.mileage}/>
 								</label>
 								<label>
 									Carriage Capacity:
-									<input name='cariage' type="text" onChange={this.handleTruckChange} value={this.state.truckinput.cariage}/>
+									<input name='cariage' maxLength='10' type="text" onChange={this.handleTruckChange} value={this.state.truckinput.cariage}/>
 								</label>
 								<label>
 									Volume:
-									<input name='volume' type="text" onChange={this.handleTruckChange} value={this.state.truckinput.volume}/>
+									<input name='volume' maxLength='10' type="text" type onChange={this.handleTruckChange} value={this.state.truckinput.volume}/>
 								</label>
 								<label>
 									Price for 1km:
-									<input name='price1km' type="text" onChange={this.handleTruckChange} value={this.state.truckinput.price1km}/>
+									<input name='price1km' maxLength='10' type="text" onChange={this.handleTruckChange} value={this.state.truckinput.price1km}/>
 								</label>
 								<label>
 									Minimum distance:
-									<input name='minDistance' type="text" onChange={this.handleTruckChange} value={this.state.truckinput.minDistance}/>
+									<input name='minDistance' maxLength='10' type="text" onChange={this.handleTruckChange} value={this.state.truckinput.minDistance}/>
 								</label>
 							</form>
 							<div className='photoSection'>

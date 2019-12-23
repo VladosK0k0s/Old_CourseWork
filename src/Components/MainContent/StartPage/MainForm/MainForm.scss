@@ -6,8 +6,8 @@
 		flex-direction: row;
 		justify-content: space-around;
 	}
-	
-	background-color: #cdcbf5;
+	border-radius: 10px;
+	background-color:  #0690cc;
 	h2{
 		text-align: center;
 	}
@@ -23,6 +23,7 @@
 	.buttonWrapper{
 		margin-top: 20px;
 		button{
+			border-radius: 5px;
 			display: block;
 			padding: 15px 30px;
 			margin: auto;

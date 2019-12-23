@@ -1,10 +1,10 @@
 DROP TABLE IF EXISTS `Trucks`;
 DROP TRIGGER IF EXISTS Trucks.date_trigger;
 CREATE TABLE IF NOT EXISTS `Trucks` (
-    `id` int unsigned NOT NULL AUTO_INCREMENT,
-    `reg_number` int unsigned NOT NULL,
+    `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+    `reg_number` bigint unsigned NOT NULL,
     `name` varchar(60) COLLATE utf8_unicode_ci NOT NULL,
-    `mileage` int unsigned NOT NULL,
+    `mileage` bigint unsigned NOT NULL,
     `reg_date` date NOT NULL,
     `cariage` int unsigned NOT NULL,
     `volume` int unsigned NOT NULL,

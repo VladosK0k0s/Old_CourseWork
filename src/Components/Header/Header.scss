@@ -60,7 +60,8 @@
 	width: 90px;
 }
 .h_2 .bars{
-	background-color: #6584F2;
+	text-decoration: none;
+	background-color: #264a8b;
 	width: 100%;
 	display: flex;
 	justify-content: space-between;
@@ -76,34 +77,45 @@
 .sign{
 	display: flex;
 	flex-direction: column;
+	>.bar{
+		font-weight: 500;
+		font-size: calc(7px + 0.5vw);
+	}
 	>p{
+		color: #fff;
 		margin: 0;
 		padding: 10px;
 	}
 }
 .signin{
+	font-weight: 500;
+	font-size: calc(7px + 0.5vw);
 	border: 1px solid black;
 	border-radius: 10px;
 	overflow: auto;
 }
 .bar{
+	color: aqua;
+	text-transform: uppercase;
 	border-radius: 50%;
 	margin-right: 10px;
 	margin-left: 10px;
 	cursor: pointer;
-    transition: ease-out .3s;
-    text-decoration: none;
-    color: black;   
-}
-.bar > div{
-    padding: 10px;
-}
-.bar:visited{
-	color: black;
-}
-.bar:hover{
-	color: white;
-}
-.bar:active{
-	color:pink;
+	transition: ease-out .3s;
+	font-weight: 800;
+	font-size: calc(10px + 0.5vw);
+	&:visited{
+		color:aqua;
+	}
+	&:hover{
+		color: white;
+		text-decoration: none;
+	}
+	&:active{
+		color:white;
+	}
+	> div{
+		text-decoration: none;
+			padding: 10px;
+	}   
 }

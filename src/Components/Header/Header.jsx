@@ -3,7 +3,7 @@ import './Header.scss'
 import {NavLink} from 'react-router-dom'
 import 'react-sticky-header/styles.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {  faArrowUp, faHome, faCogs, faUserCog } from '@fortawesome/free-solid-svg-icons'
+import {  faArrowUp } from '@fortawesome/free-solid-svg-icons'
 import { Link } from "react-scroll";
 import {  CSSTransition,  TransitionGroup} from 'react-transition-group';
 import {SetJWTActionCreator} from '../../redux/SignUpPage_reducer';
@@ -55,26 +55,24 @@ const Header = (props) =>{
 					<div  className='bars'>
 						<NavLink className='bar' to = '/'>
 							<div>
-								<FontAwesomeIcon icon={faHome} size='2x'/> 
 								<span>Home</span>
 							</div>
 						</NavLink>
-						<NavLink className='bar' to = '/content/task1'>
+						<NavLink className='bar' to = '/content/drivers'>
 							<div>
-								<span>Task 1</span>
+								<span>Our Drivers</span>
 							</div>
 						</NavLink>
-						<NavLink className='bar' to = '/content/task2'>
+						<NavLink className='bar' to = '/content/trucks'>
 							<div>
-								<span>Task 2</span>
+								<span>Our Trucks</span>
 							</div>
 						</NavLink>
 						<NavLink className='bar' to = '/content/services'>
 							<div>
-								<FontAwesomeIcon icon={faCogs} size='2x'/> 
 								<span>Services</span>
 							</div>
-						</NavLink>			
+						</NavLink>					
 							{
 								jwt
 								? <>
@@ -82,7 +80,6 @@ const Header = (props) =>{
 											props.user.login === 'admin'
 											? <NavLink className='bar' to = '/content/AdminPage'>
 													<div>
-														<FontAwesomeIcon icon={faUserCog} size='2x'/> 
 														<span>AdminPage</span>
 													</div>
 												</NavLink>
