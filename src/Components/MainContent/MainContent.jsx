@@ -13,8 +13,8 @@ import AdminPage from './AdminPage/AdminPage.jsx'
 const MainContent = (props) =>{
 	return (
 		<div className='mainContent'>
-            <Route exact path ='/Old_CourseWork/' render = {() => <StartPage data={props.store.getState().StartPage} />}/> 
-            <Route exact path = '/'  render = {() => <StartPage data={props.store.getState().StartPage} />}/> 
+            <Route exact path ='/Old_CourseWork/' render = {() => <StartPage user={props.user} data={props.store.getState().StartPage} />}/> 
+            <Route exact path = '/'  render = {() => <StartPage user={props.user} data={props.store.getState().StartPage} />}/> 
             <Route path = '/content/Trucks' render = {() => <TrucksPage data={props.store.getState().TrucksPage} />}/>
             <Route path = '/content/services' render = {() => <ServicesPage />}/>
             <Route path = '/content/Kilometers' render = {() => <RoadsPage data={props.store.getState().RoadsPage}/>}/>

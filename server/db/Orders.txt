@@ -1,0 +1,16 @@
+DROP TABLE IF EXISTS `Orders`;
+DROP TRIGGER IF EXISTS Orders.date_orders_trigger;
+CREATE TABLE IF NOT EXISTS `Orders` (
+    `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+    `user_tel` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+    `country` varchar(60) COLLATE utf8_unicode_ci NOT NULL,
+    `weight` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+    `size` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+    `time` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+    `reg_date` date NOT NULL,
+    PRIMARY KEY (id)
+)ENGINE=INNODB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;;
+CREATE TRIGGER `date_orders_trigger` 
+BEFORE INSERT ON `Orders`
+FOR EACH ROW
+    SET New.reg_date = CURDATE();

@@ -13,6 +13,7 @@ class AdminPage extends Component {
 		this.state  ={
 			drivers: [],
 			trucks: [],
+			orders: [],
 			file: '',
 			imagelink: '',
 			truckinput: {
@@ -71,6 +72,7 @@ class AdminPage extends Component {
 	componentDidMount = () =>{
 		this.getDrivers(); //id, tel, card_number, first_name, last_name, age, reg_date
 		this.getTrucks();  //id, reg_number, name, mileage, reg_date, cariage, volume, price1km, minDistance, photoname
+		this.getOrders(); //id, country, weight, size, time, user_tel, reg_date
 	}
 	getTrucksImgLinks = () =>{
 		this.state.trucks.forEach(element => {
@@ -105,6 +107,12 @@ class AdminPage extends Component {
 			.then(res =>this.setState({trucks: res.data}))
 			.then(() => this.getTrucksImgLinks())
 			.catch(err=>console.log(err));
+	}
+	getOrders = () => {
+		fetch('http://localhost:4000/Orders')
+			.then(res => res.json())
+			.then(res =>this.setState({orders: res.data}))
+			.catch(err=>console.log(err))
 	}
 	handleTruckChange = (e) =>{
 		const input = e.target;
@@ -257,6 +265,20 @@ class AdminPage extends Component {
 				</div>
 				<div>
 					<h3>Orders Section</h3>
+					{
+						(Object.prototype.toString.call(this.state.orders) !== "[object Array]") ? '' : this.state.orders.map(el=>{
+							return(
+								<div key={el.id}>
+									<h4>User Telephone: {el.user_tel}</h4>
+									<p>Weight: {el.weight}</p>
+									<p>Size: {el.size}</p>
+									<p>Country: {el.country}</p>
+									<p>Time: {el.time}</p>
+									<p>Registration date: {el.reg_date.substr(0, 10)}</p>
+								</div>
+							)
+						})
+					}
 				</div>
 			</div>
 		)

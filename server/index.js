@@ -1,12 +1,10 @@
 const express          = require('express');
 const {EnterData}      = require('./MysqlData.js');
 const cors             = require('cors');
-const path             = require("path");
 const mysql            = require('mysql');
 const morgan           = require('morgan');
 const bcrypt           = require('bcrypt');
 const multer           = require("multer");
-const uuidv4           = require('uuid/v4');
 
 const { GenerateJWT, DecodeJWT, ValidateJWT } = require("./JWT.js");
 const { saltRounds } = require('./bcryptSalt.js');
@@ -14,12 +12,6 @@ const { saltRounds } = require('./bcryptSalt.js');
 
 
 const port = process.env.PORT || 4000;
-const key = "$IloveJWT!";
-const header = {
-  alg: "HS512",
-  typ: "JWT"
-};
-
 
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -45,10 +37,14 @@ const InsertClient = (data, hash) => `INSERT INTO Clients (login, password, firs
                                 VALUES('${data.login}', '${hash}', '${data.first_name}', '${data.tel}', '${data.email}');`;
 const SelectTrucks = 'SELECT * FROM Trucks';
 const SelectDrivers = 'SELECT * FROM Drivers';
+const SelectOrders = 'SELECT * FROM Orders';
 const InsertTruck = (data) => `INSERT INTO Trucks (name, reg_number, mileage, cariage, volume, price1km, minDistance, photoname)
                                 VALUES('${data.name}', ${+data.reg_number}, ${+data.mileage}, ${+data.cariage}, ${+data.volume}, 
                                 ${+data.price1km}, ${+data.minDistance}, '${data.imagename}'); `;
+const InsertOrder = (data) => `INSERT INTO Orders (user_tel, country, weight, size, time)
+                                VALUES('${data.user_tel}', '${data.country}', '${data.weight}', '${data.size}', '${data.time}');`;
 const DeleteTruck = (id) => `DELETE FROM Trucks WHERE id = ${+id};`
+
 
 
 app.get('/', (req, res) =>{
@@ -72,7 +68,6 @@ app.post("/api/photos/get", (req, res) => {
 });
 
 app.post("/api/trucks/add", (req, res) => {
-  console.log(InsertTruck(req.body));
   if(!req.body.imagename) 
     return res.status(405).json({
       Error: "Image is necessary!"
@@ -92,7 +87,6 @@ app.post("/api/trucks/add", (req, res) => {
 });
 
 app.post('/api/trucks/del', (req, res) => {
-  console.log(req);
   connection.query(DeleteTruck(req.body.id), function(error, results){  
     if(error){
       return res.status(422).json({
@@ -134,10 +128,37 @@ app.get('/Drivers', (req, res) => {
 });
 
 
+app.get('/Orders', (req, res) => {
+  connection.query(SelectOrders, (error, results) => {
+    if (error){
+      res.send(error);
+    }
+    else{
+      return res.status(200).json({
+        data: results
+      })
+    }
+  });
+});
+
+app.post('/api/orders/add', (req, res) => {
+    connection.query(InsertOrder(req.body), (error, results) => {
+      if (error){
+        return res.status(422).json({
+          Error: "Error adding order"
+        });
+      }
+      else{
+        return res.status(200).json({
+          Message: "Success!"
+        });
+      }
+    });
+});
+
+
 app.post("/api/GenerateJWT", (req, res) =>{
-  let { header, claims, key } = req.body;
-  // In case, due to security reasons, if the client doesn't send a key,
-  // use our default key.
+  let { header, claims, key } = req.body; 
   key = key || "$PraveenIsAwesome!";
   res.json(GenerateJWT(header, claims, key))
 });

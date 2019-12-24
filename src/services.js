@@ -63,6 +63,18 @@ export const GenTruck = (truck, cb) => {
       cb(err.response, true);
     });
 };
+
+export const GenOrder = (order, cb) => {
+  axios
+    .post("/api/orders/add", order)
+    .then(function(res) {
+      cb(res);
+    })
+    .catch(function(err) {
+      cb(err.response, true);
+    });
+};
+
 export const DelTruck = (id, cb) => {
   axios
     .post("/api/trucks/del",{id: id})

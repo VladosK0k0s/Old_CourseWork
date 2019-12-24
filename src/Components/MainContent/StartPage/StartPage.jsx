@@ -19,7 +19,7 @@ class StartPage extends React.Component{
 					<h1>GUARANTEES OF OUR SUCCESS</h1>
 				</header>
 				<ListItems listData = {this.props.data.listData}/>
-				<MainForm mainFormData = {this.props.data.mainFormData}/>
+				<MainForm user={this.props.user} mainFormData = {this.props.data.mainFormData}/>
 				<h2 style ={{color:`#0be3b1`}}>Why do we do this?</h2>
 				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. <br/>
 					Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. <br/>
