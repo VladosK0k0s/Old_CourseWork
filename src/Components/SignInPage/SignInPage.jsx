@@ -88,12 +88,12 @@ class SignInPage extends React.Component{
 					{this.state.Error401 &&
 						<Alert style={{margin: '20px'}} variant='danger'>
 							{this.state.Error401}
-							<p>May be You want to <NavLink to = '/'>Sing in</NavLink></p>
 						</Alert>
 					}
 					{this.state.Error403 &&
-						<Alert style={{margin: '20px'}} variant='danger'>
+						<Alert style={{margin: '20px', textAlign: 'center'}} variant='danger'>
 							{this.state.Error403}
+							<p>May be You want to <NavLink to = '/'>Sing in</NavLink></p>
 						</Alert>
 					}
 					{this.state.Message &&
