@@ -11,7 +11,7 @@ const { saltRounds } = require('./bcryptSalt.js');
 
 
 
-const port = process.env.PORT || 4000;
+const port = 4000;
 
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {

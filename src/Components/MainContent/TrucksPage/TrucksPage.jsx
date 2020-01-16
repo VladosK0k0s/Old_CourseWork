@@ -2,12 +2,7 @@ import React from 'react';
 import './TrucksPage.scss';
 import TruckItem from './TruckItem/TruckItem.jsx';
 import axios from 'axios';
-import truck1 from './truck1.png'
-import truck2 from './truck2.png'
-import truck3 from './truck3.png'
-import truck4 from './truck4.png'
 
-let links = [truck1,truck2,truck3,truck4];
 
 class TrucksPage extends React.Component{
 	constructor(props) {
@@ -51,7 +46,8 @@ class TrucksPage extends React.Component{
 		return response.json()  
 	}
 	getTrucks = () => {
-		fetch('http://localhost:4000/Trucks')
+		const loc = `${document.location.protocol}//${document.location.hostname}`;
+		fetch(`${loc}:4000/Trucks`)
 			.then(res => res.json())
 			.then(res =>this.setState({trucks: res.data}))
 			.then(() => this.getTrucksImgLinks())

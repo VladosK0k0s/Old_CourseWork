@@ -80,7 +80,8 @@ class AdminPage extends Component {
 		});
 	}
 	getDrivers = () =>{
-		fetch('http://localhost:4000/Drivers')
+		const loc = `${document.location.protocol}//${document.location.hostname}`;
+		fetch(`${loc}:4000/Drivers`)
 			.then(res => res.json())
 			.then(res =>this.setState({drivers: res.data}))
 			.catch(err=>console.log(err))
@@ -102,14 +103,16 @@ class AdminPage extends Component {
 		});
 	}
 	getTrucks = () => {
-		fetch('http://localhost:4000/Trucks')
+		const loc = `${document.location.protocol}//${document.location.hostname}`;
+		fetch(`${loc}:4000/Trucks`)
 			.then(res => res.json())
 			.then(res =>this.setState({trucks: res.data}))
 			.then(() => this.getTrucksImgLinks())
 			.catch(err=>console.log(err));
 	}
 	getOrders = () => {
-		fetch('http://localhost:4000/Orders')
+		const loc = `${document.location.protocol}//${document.location.hostname}`;
+		fetch(`${loc}:4000/Orders`)
 			.then(res => res.json())
 			.then(res =>this.setState({orders: res.data}))
 			.catch(err=>console.log(err))

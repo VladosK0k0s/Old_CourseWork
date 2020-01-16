@@ -16,12 +16,10 @@ FOR EACH ROW
 
 
 INSERT INTO `Drivers`(`tel`, `card_number`, `first_name`, `last_name`, `age`) 
-  VALUES(0671488228, 1234000984562245, 'Валерий', 'Жмышенко', 54);
+  VALUES(0671488228, 1234000984562245, 'Дмитрій', 'Смиковський', 54);
 
 INSERT INTO `Drivers`(`tel`, `card_number`, `first_name`, `last_name`, `age`) 
-  VALUES(0675353535, 1111222233334444, 'Денис', 'Петров', 27);
+  VALUES(0675353535, 1111222233334444, 'Данієль', 'Мілас', 27);
 
 INSERT INTO `Drivers`(`tel`, `card_number`, `first_name`, `last_name`, `age`) 
-  VALUES(0661534899, 5375414113568447, 'Владислав', 'Степанюк', 19);
-INSERT INTO `Drivers`(`tel`, `card_number`, `first_name`, `last_name`, `age`) 
-  VALUES(0991524798, 1488228834009511, 'Dead', 'Inside', 12);
+  VALUES(0661534899, 5375414113568447, 'Анатолій', 'Олександров', 19);
