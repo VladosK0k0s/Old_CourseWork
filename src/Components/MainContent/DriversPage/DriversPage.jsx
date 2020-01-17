@@ -19,8 +19,9 @@ class DriversPage extends React.Component{
 	componentDidMount(){
 		this.getDrivers();
 	}
-	async getDrivers(){
-		await fetch('http://localhost:4000/Drivers')
+	getDrivers(){
+		const loc = `${document.location.protocol}//${document.location.hostname}`;
+		fetch(`${loc}:4000/Drivers`)
 			.then(res => res.json())
 			.then(res =>this.setState({drivers: res.data}))
 			.catch(err=>console.log(err))
@@ -30,7 +31,7 @@ class DriversPage extends React.Component{
 			<div className='DriversPage'>
 				<h1>Our Drivers</h1>
 				{
-					this.state.drivers.map(el=>{
+					(Object.prototype.toString.call(this.state.drivers) !== "[object Array]"	) ? '' : this.state.drivers.map(el=>{
 						return(
 							<div className='driverItem' key={el.id}>
 								{

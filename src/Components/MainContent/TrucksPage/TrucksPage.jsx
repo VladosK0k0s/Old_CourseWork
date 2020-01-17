@@ -40,7 +40,8 @@ class TrucksPage extends React.Component{
 				this.setState({
 					trucks: newArr
 				})
-		});
+			})
+			.catch();
 	}
 	json = (response) => {  
 		return response.json()  

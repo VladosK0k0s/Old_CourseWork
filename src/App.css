@@ -12,10 +12,7 @@ button{
 	background-color: #fff;
 	transition: .225s;
 }
-button:hover{
-	color:  #fff;
-	background-color: #10c8d2;
-}
+button
 h1{
 	text-align: center;
 }
@@ -32,3 +29,4 @@ h1{
 	flex-direction: column;
 	min-height: 100%;
 }
+.App-wrapper div {}
