@@ -59,6 +59,9 @@ class TrucksPage extends React.Component{
 			<div className='TrucksPage'>
 				<h1>Our Trucks</h1>
 				{
+					this.state.trucks.length === 0 ? 'Loading...' : ''
+				}
+				{
 					(Object.prototype.toString.call(this.state.trucks) !== "[object Array]"	) ? '' : this.state.trucks.map(el=>{
 						return(
 							<div key={el.id}>

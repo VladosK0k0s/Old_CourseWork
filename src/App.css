@@ -23,6 +23,7 @@ h1{
 	line-height: 1.5;
 	font-weight: 400;
 	font-size: 14px;
+	height: 100%;
 }
 .App-wrapper > div{
 	display: flex;

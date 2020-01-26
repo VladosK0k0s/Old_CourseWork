@@ -31,6 +31,9 @@ class DriversPage extends React.Component{
 			<div className='DriversPage'>
 				<h1>Our Drivers</h1>
 				{
+					this.state.drivers.length === 0 ? 'Loading...' : ''
+				}
+				{
 					(Object.prototype.toString.call(this.state.drivers) !== "[object Array]"	) ? '' : this.state.drivers.map(el=>{
 						return(
 							<div className='driverItem' key={el.id}>

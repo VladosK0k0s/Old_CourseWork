@@ -170,6 +170,9 @@ class AdminPage extends Component {
 				<div>
 					<h3>Trucks Section</h3>
 					{
+						this.state.trucks.length === 0 ? 'Loading...' : ''
+					}
+					{
 						(Object.prototype.toString.call(this.state.trucks) !== "[object Array]"	) ? '' : this.state.trucks.map(el=>{
 							return(
 								<div className='truckinfo' key={el.id}>
@@ -254,6 +257,9 @@ class AdminPage extends Component {
 				<div>
 					<h3>Drivers Section</h3>
 					{
+						this.state.drivers.length === 0 ? 'Loading...' : ''
+					}
+					{
 						(Object.prototype.toString.call(this.state.drivers) !== "[object Array]") ? '' : this.state.drivers.map(el=>{
 							return(
 								<div key={el.id}>
@@ -268,6 +274,9 @@ class AdminPage extends Component {
 				</div>
 				<div>
 					<h3>Orders Section</h3>
+					{
+						this.state.orders.length === 0 ? 'Loading...' : ''
+					}
 					{
 						(Object.prototype.toString.call(this.state.orders) !== "[object Array]") ? '' : this.state.orders.map(el=>{
 							return(
